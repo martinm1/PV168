@@ -9,6 +9,6 @@ package cz.muni.fi.pv168;
  *
  * @author martin
  */
-public interface AgentManager {
+public interface AgentManager { //comment
     
 }
