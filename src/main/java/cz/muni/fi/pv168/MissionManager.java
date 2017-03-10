@@ -5,10 +5,20 @@
  */
 package cz.muni.fi.pv168;
 
+import java.util.List;
+
 /**
  *
  * @author martin
  */
 public interface MissionManager {
+    void createMission(Mission mission);
     
+    void updateMission(Mission mission);
+    
+    void deleteMission(Mission mission);
+    
+    Mission findMissionById(Long id);
+    
+    List<Mission> findAllMissions(); 
 }

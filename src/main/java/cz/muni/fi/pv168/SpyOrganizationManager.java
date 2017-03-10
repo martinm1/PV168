@@ -5,10 +5,17 @@
  */
 package cz.muni.fi.pv168;
 
+import java.util.List;
 /**
  *
  * @author martin
  */
 public interface SpyOrganizationManager {
+    Mission findMissionWithAgent(Agent agent);
     
+    List<Agent> findAgentsOnMission(Mission mission);
+    
+    void assignMission(Agent agent, Mission mission);
+    
+    void unassignMission(Agent agent, Mission mission);
 }
