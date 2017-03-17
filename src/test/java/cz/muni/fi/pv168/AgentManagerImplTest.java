@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import javax.sql.DataSource;
 import org.apache.derby.jdbc.EmbeddedDataSource;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -48,7 +49,16 @@ public class AgentManagerImplTest {
     
     @Before
     public void setUp() throws SQLException {
+        //ds = prepareDataSource();
+        //DBUtils.executeSqlScript(ds,AgentManager.class.getResource("createTables.sql"));
         manager = new AgentManagerImpl();
+        //manager.setDataSource(ds);
+    }
+    
+    @After
+    public void tearDown() throws SQLException {
+        // Drop tables after each test
+        //DBUtils.executeSqlScript(ds,GraveManager.class.getResource("dropTables.sql"));
     }
     
     @Test
