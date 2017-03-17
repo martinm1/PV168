@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.sql.DataSource;
+import org.apache.derby.jdbc.EmbeddedDataSource;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -29,10 +31,20 @@ import org.junit.rules.ExpectedException;
 public class AgentManagerImplTest {
     //test1111111;
     private AgentManagerImpl manager;
+    private DataSource ds;
     
     @Rule
     // attribute annotated with @Rule annotation must be public :-(
     public ExpectedException expectedException = ExpectedException.none();
+    
+    private static DataSource prepareDataSource() throws SQLException {
+        EmbeddedDataSource ds = new EmbeddedDataSource();
+        // we will use in memory database
+        ds.setDatabaseName("memory:agentmgr-test");
+        // database is created automatically if it does not exist yet
+        ds.setCreateDatabase("create");
+        return ds;
+    }
     
     @Before
     public void setUp() throws SQLException {

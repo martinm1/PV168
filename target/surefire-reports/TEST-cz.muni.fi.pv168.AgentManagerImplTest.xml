@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="cz.muni.fi.pv168.AgentManagerImplTest" time="0.231" errors="3" skipped="0">
+<testsuite tests="3" failures="0" name="cz.muni.fi.pv168.AgentManagerImplTest" time="0.244" errors="3" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -60,10 +60,10 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgent" time="0.058">
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgent" time="0.055">
     <error message="Not supported yet." type="java.lang.UnsupportedOperationException">java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
-	at cz.muni.fi.pv168.AgentManagerImplTest.deleteAgent(AgentManagerImplTest.java:114)
+	at cz.muni.fi.pv168.AgentManagerImplTest.deleteAgent(AgentManagerImplTest.java:126)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -98,10 +98,10 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
   </testcase>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgents" time="0.004">
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgents" time="0.001">
     <error message="Not supported yet." type="java.lang.UnsupportedOperationException">java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.findAllAgents(AgentManagerImpl.java:38)
-	at cz.muni.fi.pv168.AgentManagerImplTest.findAllAgents(AgentManagerImplTest.java:64)
+	at cz.muni.fi.pv168.AgentManagerImplTest.findAllAgents(AgentManagerImplTest.java:76)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -139,7 +139,7 @@
   <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgent" time="0">
     <error message="Not supported yet." type="java.lang.UnsupportedOperationException">java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
-	at cz.muni.fi.pv168.AgentManagerImplTest.createAgent(AgentManagerImplTest.java:52)
+	at cz.muni.fi.pv168.AgentManagerImplTest.createAgent(AgentManagerImplTest.java:64)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
