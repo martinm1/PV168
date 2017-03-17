@@ -42,6 +42,7 @@ public class MissionManagerImplTest {
         Mission result = manager.findMissionById(missionId);
         assertEquals(mission, result);
         assertNotSame(mission, result);
+        assertDeepEquals(mission, result);
         }
     
     @Test
@@ -61,6 +62,7 @@ public class MissionManagerImplTest {
         Collections.sort(expected, MISSION_ID_COMPARATOR);
         
         assertEquals(expected, actual);
+        assertDeepEquals(expected, actual);
     }
     
     @Test(expected = IllegalArgumentException.class)
@@ -76,6 +78,20 @@ public class MissionManagerImplTest {
         mission.setDanger(danger);
         mission.setAssignment(assignment);
         return mission;
+    }
+    
+    private void assertDeepEquals(Mission expected, Mission actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getDanger(), actual.getDanger());
+        assertEquals(expected.getAssignment(), actual.getAssignment());
+    }
+    
+    private void assertDeepEquals(List<Mission> expectedList, List<Mission> actualList) {
+        for (int i = 0; i < expectedList.size(); i++) {
+            Mission expected = expectedList.get(i);
+            Mission actual = actualList.get(i);
+            assertDeepEquals(expected, actual);
+        }
     }
     
     private static final Comparator<Mission> MISSION_ID_COMPARATOR =
