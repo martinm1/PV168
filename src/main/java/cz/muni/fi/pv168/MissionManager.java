@@ -12,13 +12,53 @@ import java.util.List;
  * @author martin
  */
 public interface MissionManager {
-    void createMission(Mission mission);
     
-    void updateMission(Mission mission);
+    /**
+     * Stores new mission into the database. Id for the new mission is automatically
+     * generated and stored into attribute id.
+     * 
+     * @param mission mission to be created.
+     * @throws IllegalArgumentException when mission is null.
+     * @throws IllegalEntityException when mission has already assigned id or does not have assigned some attribute values.
+     * @throws ServiceFailureException when database operation fails.
+     */
+    void createMission(Mission mission) throws ServiceFailureException, IllegalEntityException;
     
-    void deleteMission(Mission mission);
+    /**
+     * Updates mission stored in the database.
+     * 
+     * @param mission updated mission to be stored into database.
+     * @throws IllegalArgumentException when mission is null.
+     * @throws IllegalEntityException when mission has null id or id not stored in the database or does not have assigned some attribute values.
+     * @throws ServiceFailureException when database operation fails.
+     */
+    void updateMission(Mission mission) throws ServiceFailureException, IllegalEntityException;
     
-    Mission findMissionById(Long id);
+    /**
+     * Deletes mission from the database. 
+     * 
+     * @param mission mission to be deleted from database.
+     * @throws IllegalArgumentException when mission is null.
+     * @throws IllegalEntityException when mission has null id or id not stored in the database or does not have assigned some attribute values.
+     * @throws ServiceFailureException when database operation fails.
+     */
+    void deleteMission(Mission mission) throws ServiceFailureException, IllegalEntityException;
     
-    List<Mission> findAllMissions(); 
+    /**
+     * Returns mission with given id.
+     * 
+     * @param id primary key of requested mission.
+     * @return mission with given id or null if requested mission is not stored in the database.
+     * @throws IllegalArgumentException when given id is null.
+     * @throws ServiceFailureException when database operation fails.
+     */
+    Mission findMissionById(Long id) throws ServiceFailureException;
+    
+    /**
+     * Returns list of all missions in the database.
+     * 
+     * @return list of all missions in the database.
+     * @throws ServiceFailureException when database operation fails.
+     */
+    List<Mission> findAllMissions() throws ServiceFailureException; 
 }

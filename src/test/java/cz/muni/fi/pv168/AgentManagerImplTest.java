@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import javax.sql.DataSource;
 import org.apache.derby.jdbc.EmbeddedDataSource;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -82,6 +83,42 @@ public class AgentManagerImplTest {
     }
     
     @Test
+    public void updateAgent() {
+        String str1 = "1984-01-14 10:39";
+        String str2 = "1984-01-14 10:40";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        Agent agentForUpdate = new Agent();
+        Agent anotherAgent = new Agent();
+        
+        agentForUpdate.setName("BondJamesBond");
+        agentForUpdate.setWorkingSince(LocalDateTime.parse(str1, formatter));
+        agentForUpdate.setCompromised(Boolean.FALSE);
+        
+        anotherAgent.setName("Johny English");
+        anotherAgent.setWorkingSince(LocalDateTime.parse(str2, formatter));
+        anotherAgent.setCompromised(Boolean.TRUE);
+
+        manager.createAgent(agentForUpdate);
+        manager.createAgent(anotherAgent);
+        
+        manager.updateAgent(agentForUpdate);
+        
+        assertThat(manager.findAgentById(agentForUpdate.getId()))
+                .isEqualToComparingFieldByField(agentForUpdate);
+        
+        assertThat(manager.findAgentById(anotherAgent.getId()))
+                .isEqualToComparingFieldByField(anotherAgent);
+        
+        /*Long agentId = agent.getId();
+        assertNotNull(agentId);
+        Agent result = manager.findAgentById(agentId);
+        assertEquals(agent, result);
+        assertNotSame(agent, result);
+        assertDeepEquals(agent, result);*/
+    }
+    
+    @Test
     public void findAllAgents() {
         assertTrue(manager.findAllAgents().isEmpty());
 
@@ -145,6 +182,228 @@ public class AgentManagerImplTest {
         assertNotNull(manager.findAgentById(a2.getId()));
 
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void createNullAgent() {
+        manager.createAgent(null);
+    }
+    
+    @Test
+    public void createAgentWithExistingId() {
+        String str1 = "1984-01-14 10:39";
+        String str2 = "1984-01-14 10:40";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        
+        Agent a1 = new Agent();
+        Agent a2 = new Agent();
+        
+        a1.setName("BondJamesBond");
+        a1.setWorkingSince(LocalDateTime.parse(str1, formatter));
+        a1.setCompromised(Boolean.FALSE);
+        manager.createAgent(a1);
+        
+        a2.setName("Johny English");
+        a2.setWorkingSince(LocalDateTime.parse(str2, formatter));
+        a2.setCompromised(Boolean.TRUE);
+        a2.setId(a1.getId());
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.createAgent(a2);
+    }
+    
+    @Test
+    public void createAgentWithNullName() {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName(null);
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.createAgent(agent);
+    }
+    
+    @Test
+    public void createAgentWithNullWorkingSince() {
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(null);
+        agent.setCompromised(Boolean.FALSE);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.createAgent(agent);
+    }
+    
+    @Test
+    public void createAgentWithNullCompromised() {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(null);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.createAgent(agent);
+    }
+    
+    @Test
+    public void updateAgentWithNullName() {
+        String str1 = "1984-01-14 10:39";
+        String str2 = "1984-01-14 10:40";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        Agent agentForUpdate = new Agent();
+        Agent anotherAgent = new Agent();
+        
+        agentForUpdate.setName("BondJamesBond");
+        agentForUpdate.setWorkingSince(LocalDateTime.parse(str1, formatter));
+        agentForUpdate.setCompromised(Boolean.FALSE);
+        
+        anotherAgent.setName("Johny English");
+        anotherAgent.setWorkingSince(LocalDateTime.parse(str2, formatter));
+        anotherAgent.setCompromised(Boolean.TRUE);
+
+        manager.createAgent(agentForUpdate);
+        manager.createAgent(anotherAgent);
+        
+        agentForUpdate.setName(null);
+        expectedException.expect(IllegalEntityException.class);
+        manager.updateAgent(agentForUpdate);
+        
+    }
+    
+    @Test
+    public void updateAgentWithNullWorkingSince() {
+        String str1 = "1984-01-14 10:39";
+        String str2 = "1984-01-14 10:40";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        Agent agentForUpdate = new Agent();
+        Agent anotherAgent = new Agent();
+        
+        agentForUpdate.setName("BondJamesBond");
+        agentForUpdate.setWorkingSince(LocalDateTime.parse(str1, formatter));
+        agentForUpdate.setCompromised(Boolean.FALSE);
+        
+        anotherAgent.setName("Johny English");
+        anotherAgent.setWorkingSince(LocalDateTime.parse(str2, formatter));
+        anotherAgent.setCompromised(Boolean.TRUE);
+
+        manager.createAgent(agentForUpdate);
+        manager.createAgent(anotherAgent);
+        
+        agentForUpdate.setWorkingSince(null);
+        expectedException.expect(IllegalEntityException.class);
+        manager.updateAgent(agentForUpdate);
+        
+    }
+    
+    @Test
+    public void updateAgentWithNullCompromised() {
+        String str1 = "1984-01-14 10:39";
+        String str2 = "1984-01-14 10:40";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+        Agent agentForUpdate = new Agent();
+        Agent anotherAgent = new Agent();
+        
+        agentForUpdate.setName("BondJamesBond");
+        agentForUpdate.setWorkingSince(LocalDateTime.parse(str1, formatter));
+        agentForUpdate.setCompromised(Boolean.FALSE);
+        
+        anotherAgent.setName("Johny English");
+        anotherAgent.setWorkingSince(LocalDateTime.parse(str2, formatter));
+        anotherAgent.setCompromised(Boolean.TRUE);
+
+        manager.createAgent(agentForUpdate);
+        manager.createAgent(anotherAgent);
+        
+        agentForUpdate.setCompromised(null);
+        expectedException.expect(IllegalEntityException.class);
+        manager.updateAgent(agentForUpdate);
+        
+    }
+    
+    @Test
+    public void deleteAgentWithNonExistingId() {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        Long agentId = 12345678910L;
+        
+        agent.setId(agentId);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.deleteAgent(agent);
+    }
+    
+    @Test
+    public void deleteAgentWithNullName() {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        agent.setName(null);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.deleteAgent(agent);
+    }
+    
+    @Test
+    public void deleteAgentWithNullWorkingSince() {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        agent.setWorkingSince(null);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.deleteAgent(agent);
+    }
+    
+    @Test
+    public void deleteAgentWithNullCompromised() {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        agent.setCompromised(null);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.deleteAgent(agent);
+    }
+    
+    
     
     private void assertDeepEquals(Agent expected, Agent actual) {
         assertEquals(expected.getId(), actual.getId());
