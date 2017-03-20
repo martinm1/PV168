@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cz.muni.fi.pv168.AgentManagerImplTest
 -------------------------------------------------------------------------------
-Tests run: 16, Failures: 3, Errors: 13, Skipped: 0, Time elapsed: 0.38 sec <<< FAILURE!
-createAgentWithExistingId(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.061 sec  <<< ERROR!
+Tests run: 16, Failures: 3, Errors: 13, Skipped: 0, Time elapsed: 0.338 sec <<< FAILURE!
+createAgentWithExistingId(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.089 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.createAgentWithExistingId(AgentManagerImplTest.java:204)
@@ -39,7 +39,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-createAgentWithNullCompromised(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.004 sec  <<< FAILURE!
+createAgentWithNullCompromised(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError: 
 Expected: an instance of cz.muni.fi.pv168.IllegalEntityException
      but: <java.lang.UnsupportedOperationException: Not supported yet.> is a java.lang.UnsupportedOperationException
@@ -145,7 +145,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-findAllAgents(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.002 sec  <<< ERROR!
+findAllAgents(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.findAllAgents(AgentManagerImpl.java:38)
 	at cz.muni.fi.pv168.AgentManagerImplTest.findAllAgents(AgentManagerImplTest.java:123)
@@ -182,7 +182,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-updateAgent(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.004 sec  <<< ERROR!
+updateAgent(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.updateAgent(AgentManagerImplTest.java:102)
@@ -219,7 +219,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-createAgent(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.002 sec  <<< ERROR!
+createAgent(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.createAgent(AgentManagerImplTest.java:75)
@@ -256,7 +256,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-createNullAgent(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.003 sec  <<< ERROR!
+createNullAgent(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.Exception: Unexpected exception, expected<java.lang.IllegalArgumentException> but was<java.lang.UnsupportedOperationException>
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
@@ -297,7 +297,7 @@ Caused by: java.lang.UnsupportedOperationException: Not supported yet.
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
 	... 25 more
-deleteAgentWithNullWorkingSince(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.002 sec  <<< ERROR!
+deleteAgentWithNullWorkingSince(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.deleteAgentWithNullWorkingSince(AgentManagerImplTest.java:380)
@@ -403,7 +403,7 @@ Stacktrace was: java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-deleteAgentWithNullCompromised(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.001 sec  <<< ERROR!
+deleteAgentWithNullCompromised(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.deleteAgentWithNullCompromised(AgentManagerImplTest.java:398)
@@ -440,7 +440,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-deleteAgentWithNonExistingId(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.003 sec  <<< ERROR!
+deleteAgentWithNonExistingId(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.deleteAgentWithNonExistingId(AgentManagerImplTest.java:342)
@@ -477,7 +477,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-createAgentWithNullName(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+createAgentWithNullName(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: 
 Expected: an instance of cz.muni.fi.pv168.IllegalEntityException
      but: <java.lang.UnsupportedOperationException: Not supported yet.> is a java.lang.UnsupportedOperationException
@@ -583,7 +583,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-updateAgentWithNullWorkingSince(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.002 sec  <<< ERROR!
+updateAgentWithNullWorkingSince(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.updateAgentWithNullWorkingSince(AgentManagerImplTest.java:297)
@@ -620,7 +620,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-updateAgentWithNullCompromised(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.032 sec  <<< ERROR!
+updateAgentWithNullCompromised(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.updateAgentWithNullCompromised(AgentManagerImplTest.java:323)
@@ -657,7 +657,7 @@ java.lang.UnsupportedOperationException: Not supported yet.
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-deleteAgentWithNullName(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.003 sec  <<< ERROR!
+deleteAgentWithNullName(cz.muni.fi.pv168.AgentManagerImplTest)  Time elapsed: 0.071 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at cz.muni.fi.pv168.AgentManagerImpl.createAgent(AgentManagerImpl.java:18)
 	at cz.muni.fi.pv168.AgentManagerImplTest.deleteAgentWithNullName(AgentManagerImplTest.java:362)

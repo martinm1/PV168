@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 import java.util.Comparator;
 
 import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  *
@@ -70,7 +71,118 @@ public class MissionManagerImplTest {
         manager.createMission(null);
     }
     
+    @Test
+    public void createMissionWithExistingId(){
+        Mission m = newMission(8,"TestMission");
+        m.setId(1L);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.createMission(m);
+    }
     
+    @Test
+    public void createMissionWithNegativeDangerLvl() {
+    Mission m = newMission(-5,"TestMission");
+    
+    expectedException.expect(IllegalEntityException.class);
+    manager.createMission(m);
+    }
+    
+    @Test
+    public void createMissionWithNullAssignment() {
+        Mission m = newMission(8,null);
+        
+        expectedException.expect(IllegalEntityException.class);
+        manager.createMission(m);   
+    }
+    
+    @Test
+    public void updateMissionAssignment() {
+        Mission missionForUpdate = newMission(8,"TestMission1");
+        Mission anotherMission = newMission(2,"TestMission2");
+        manager.createMission(anotherMission);
+        manager.createMission(missionForUpdate);
+        
+        missionForUpdate.setAssignment("UpdatedMission");
+        manager.updateMission(missionForUpdate);
+        
+        assertThat(manager.findMissionById(missionForUpdate.getId()))
+                .isEqualToComparingFieldByField(missionForUpdate);
+        
+        assertThat(manager.findMissionById(anotherMission.getId()))
+                .isEqualToComparingFieldByField(anotherMission);
+    }
+    
+    @Test
+    public void updateMissionDangerLvl() {
+        Mission missionForUpdate = newMission(8,"TestMission1");
+        Mission anotherMission = newMission(2,"TestMission2");
+        manager.createMission(anotherMission);
+        manager.createMission(missionForUpdate);
+        
+        missionForUpdate.setDanger(1);
+        manager.updateMission(missionForUpdate);
+        
+        assertThat(manager.findMissionById(missionForUpdate.getId()))
+                .isEqualToComparingFieldByField(missionForUpdate);
+        
+        assertThat(manager.findMissionById(anotherMission.getId()))
+                .isEqualToComparingFieldByField(anotherMission);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void updateNullMission(){
+        manager.updateMission(null);
+    }
+    
+    @Test
+    public void updateMissionWithNegativeDangerLvl() {
+        Mission m = newMission(8,"TestMission");
+        manager.createMission(m);
+        m.setDanger(-5);
+        expectedException.expect(IllegalEntityException.class);
+        manager.updateMission(m);
+    }
+    
+    @Test
+    public void updateMissionWithNullAssignment() {
+        Mission m = newMission(8,"TestMission");
+        manager.createMission(m);
+        m.setAssignment(null);
+        expectedException.expect(IllegalEntityException.class);
+        manager.updateMission(m);
+    }
+    
+    @Test
+    public void deleteMission() {
+        Mission m1 = newMission(8,"TestMission1");
+        Mission m2 = newMission(2,"TestMission2");
+        manager.createMission(m2);
+        manager.createMission(m1);
+        
+        assertThat(manager.findMissionById(m1.getId())).isNotNull();
+        assertThat(manager.findMissionById(m2.getId())).isNotNull();
+        
+        manager.deleteMission(m1);
+        
+        assertThat(manager.findMissionById(m1.getId())).isNull();
+        assertThat(manager.findMissionById(m2.getId())).isNotNull();
+        
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteNullMission() {
+        manager.deleteMission(null);
+    }
+    
+    @Test
+    public void deleteMissionWithNullId(){
+        Mission m = newMission(8,"TestMission");
+        m.setId(null);
+        expectedException.expect(IllegalEntityException.class);
+        manager.deleteMission(m);
+    
+    }
     
     
     public static Mission newMission(int danger, String assignment){
