@@ -63,11 +63,10 @@ public class SpyOrganizationManagerImplTest {
         missionWithNullId.setId(null);
         missionNotInDB = newMission(100,"TestOutM");
         missionNotInDB.setId(m2.getId() + 100);
-        assertThat(missionManager.findMissionById(missionNotInDB.getId())).isNull();
         
         agentWithNullId = newAgent("TestNullA","1984-08-10 10:09",Boolean.FALSE);
         agentNotInDB = newAgent("TestOutA","1984-08-10 10:09",Boolean.TRUE);
-        assertThat(agentManager.findAgentById(agentNotInDB.getId())).isNull();
+        
     }
     
     @Test
