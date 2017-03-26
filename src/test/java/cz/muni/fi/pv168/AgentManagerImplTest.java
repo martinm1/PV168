@@ -50,16 +50,16 @@ public class AgentManagerImplTest {
     
     @Before
     public void setUp() throws SQLException {
-        //ds = prepareDataSource();
-        //DBUtils.executeSqlScript(ds,AgentManager.class.getResource("createTables.sql"));
+        ds = prepareDataSource();
+        DBUtils.executeSqlScript(ds,AgentManager.class.getResource("createTables.sql"));
         manager = new AgentManagerImpl();
-        //manager.setDataSource(ds);
+        manager.setDataSource(ds);
     }
     
     @After
     public void tearDown() throws SQLException {
         // Drop tables after each test
-        //DBUtils.executeSqlScript(ds,GraveManager.class.getResource("dropTables.sql"));
+        DBUtils.executeSqlScript(ds,AgentManager.class.getResource("dropTables.sql"));
     }
     
     @Test

@@ -5,6 +5,10 @@
  */
 package cz.muni.fi.pv168;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,4 +42,8 @@ public class MissionManagerImpl implements MissionManager {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    static Mission executeQueryForSingleMission(PreparedStatement st) throws SQLException, ServiceFailureException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
