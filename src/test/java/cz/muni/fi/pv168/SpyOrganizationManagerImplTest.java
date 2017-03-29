@@ -100,8 +100,8 @@ public class SpyOrganizationManagerImplTest {
     
         manager.assignMission(a1, m2);
         
-        assertThat(manager.findMissionWithAgent(a1)).isEqualToComparingFieldByField(m3);
-    
+        assertThat(manager.findMissionWithAgent(a1)).isEqualToComparingFieldByField(m2);
+        
         assertThat(manager.findMissionWithAgent(a2)).isNull();
         assertThat(manager.findMissionWithAgent(a3)).isNull();
         assertThat(manager.findMissionWithAgent(a4)).isNull();

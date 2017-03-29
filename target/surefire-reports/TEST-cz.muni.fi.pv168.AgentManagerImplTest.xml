@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="16" failures="0" name="cz.muni.fi.pv168.AgentManagerImplTest" time="3.517" errors="0" skipped="0">
+<testsuite tests="16" failures="0" name="cz.muni.fi.pv168.AgentManagerImplTest" time="3.426" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -60,20 +60,20 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithExistingId" time="1.996"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullCompromised" time="0.078"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgent" time="0.15"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgents" time="0.097"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgent" time="0.173"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgent" time="0.081"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createNullAgent" time="0.054"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullWorkingSince" time="0.064"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullWorkingSince" time="0.052"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullCompromised" time="0.063"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNonExistingId" time="0.076"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullName" time="0.05"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullName" time="0.077"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullWorkingSince" time="0.057"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullCompromised" time="0.057"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullName" time="0.069"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithExistingId" time="1.87"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullCompromised" time="0.08"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgent" time="0.146"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgents" time="0.099"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgent" time="0.179"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgent" time="0.091"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createNullAgent" time="0.066"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullWorkingSince" time="0.073"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullWorkingSince" time="0.062"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullCompromised" time="0.07"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNonExistingId" time="0.087"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullName" time="0.053"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullName" time="0.085"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullWorkingSince" time="0.065"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullCompromised" time="0.062"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullName" time="0.056"/>
 </testsuite>

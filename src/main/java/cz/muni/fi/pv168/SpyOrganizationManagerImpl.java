@@ -7,6 +7,7 @@ package cz.muni.fi.pv168;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,7 +51,7 @@ public class SpyOrganizationManagerImpl implements SpyOrganizationManager {
         try {
             conn = dataSource.getConnection();
             st = conn.prepareStatement(
-                    "SELECT Mission.id, danger, assignment" +
+                    "SELECT Mission.id, danger, assignment " +
                     "FROM Mission JOIN Agent ON Mission.id = Agent.missionId " +
                     "WHERE Agent.id = ?");
             st.setLong(1, agent.getId());
@@ -117,7 +118,7 @@ public class SpyOrganizationManagerImpl implements SpyOrganizationManager {
             // Temporary turn autocommit mode off. It is turned back on in 
             // method DBUtils.closeQuietly(...) 
             conn.setAutoCommit(false);
-            
+            checkIfMissionExists(conn, mission);
             updateSt = conn.prepareStatement(
                     "UPDATE Agent SET missionId = ? WHERE id = ? AND missionId IS NULL");
             updateSt.setLong(1, mission.getId());
@@ -179,5 +180,19 @@ public class SpyOrganizationManagerImpl implements SpyOrganizationManager {
         }
     }
     
+    private static void checkIfMissionExists(Connection conn, Mission mission) throws IllegalEntityException, SQLException {
+        PreparedStatement checkSt = null;
+        try {
+            checkSt = conn.prepareStatement(
+                    "SELECT Id FROM Mission WHERE Mission.id = ?");
+            checkSt.setLong(1, mission.getId());
+            ResultSet rs = checkSt.executeQuery();
+            if (!rs.next()) { 
+                throw new IllegalEntityException("Mission " + mission + " does not exist in db");
+            }
+        } finally {
+            DBUtils.closeQuietly(null, checkSt);
+        }
+    }
     
 }
