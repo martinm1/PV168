@@ -1,71 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="19" failures="0" name="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" time="0.91" errors="4" skipped="0">
+<testsuite tests="19" failures="0" name="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" time="2.019" errors="4" skipped="0">
   <properties>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_121\jre\bin"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.121-b13"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
-    <property name="path.separator" value=";"/>
+    <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="user.script" value=""/>
-    <property name="user.country" value="SK"/>
+    <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Boris\Desktop\pv168-repository\pv168"/>
-    <property name="java.runtime.version" value="1.8.0_121-b13"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_121\jre\lib\endorsed"/>
+    <property name="user.dir" value="/home/martin/data-linux/projects/pv168"/>
+    <property name="java.runtime.version" value="1.8.0_121-8u121-b13-0ubuntu1.16.04.2-b13"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\Boris\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 7"/>
-    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
-    <property name="classworlds.conf" value="C:\Program Files\NetBeans 8.2\java\maven\bin\m2.conf"/>
-    <property name="sun.jnu.encoding" value="Cp1250"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Lenovo\Fingerprint Manager Pro\;C:\Program Files (x86)\Common Files\Lenovo;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\SWTOOLS\ReadyApps;C:\Program Files (x86)\PuTTY\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;."/>
+    <property name="os.name" value="Linux"/>
+    <property name="maven.ext.class.path" value="/home/martin/.netbeans/8.1/maven-nblib/netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="/home/martin/.netbeans/8.1/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/bin/../jre/lib/amd64:/usr/lib/jvm/java-8-openjdk-amd64/bin/../jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="6.1"/>
-    <property name="user.home" value="C:\Users\Boris"/>
+    <property name="os.version" value="4.4.0-70-generic"/>
+    <property name="user.home" value="/home/martin"/>
     <property name="user.timezone" value="Europe/Prague"/>
-    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
-    <property name="java.specification.version" value="1.8"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="user.name" value="Boris"/>
-    <property name="java.class.path" value="C:\Program Files\NetBeans 8.2\java\maven\boot\plexus-classworlds-2.4.jar"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="user.name" value="martin"/>
+    <property name="java.class.path" value="/home/martin/.netbeans/8.1/maven/boot/plexus-classworlds-2.4.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_121\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 install"/>
+    <property name="java.home" value="/usr/lib/jvm/java-8-openjdk-amd64/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/home/martin/.netbeans/8.1/maven-nblib/netbeans-eventspy.jar clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.language" value="sk"/>
-    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.8.0_121"/>
-    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
-    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_121\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_121\jre\classes"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="securerandom.source" value="file:/dev/./urandom"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="C:\Program Files\NetBeans 8.2\java\maven"/>
-    <property name="file.separator" value="\"/>
+    <property name="maven.home" value="/home/martin/.netbeans/8.1/maven"/>
+    <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="sun.desktop" value="windows"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentWithNullIdFromMission" time="0.041"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMission" time="0.201"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromNullMission" time="0"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnNullMission" time="0"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionNotInDB" time="0.061">
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentWithNullIdFromMission" time="0.305"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMission" time="0.175"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromNullMission" time="0.115"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnNullMission" time="0.069"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionNotInDB" time="0.11">
     <error message="Unexpected exception, expected&lt;cz.muni.fi.pv168.IllegalEntityException&gt; but was&lt;cz.muni.fi.pv168.ServiceFailureException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;cz.muni.fi.pv168.IllegalEntityException&gt; but was&lt;cz.muni.fi.pv168.ServiceFailureException&gt;
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
@@ -106,7 +105,7 @@ Caused by: cz.muni.fi.pv168.ServiceFailureException: Error when assigning agent 
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
 	... 25 more
-Caused by: org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329203614012&apos; for key (102).  The statement has been rolled back.
+Caused by: org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329234036062&apos; for key (102).  The statement has been rolled back.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(Unknown Source)
@@ -119,7 +118,7 @@ Caused by: org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViola
 	at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeUpdate(Unknown Source)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.assignMission(SpyOrganizationManagerImpl.java:125)
 	... 35 more
-Caused by: ERROR 23503: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329203614012&apos; for key (102).  The statement has been rolled back.
+Caused by: ERROR 23503: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329234036062&apos; for key (102).  The statement has been rolled back.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.sql.execute.ForeignKeyRIChecker.doCheck(Unknown Source)
@@ -130,9 +129,9 @@ Caused by: ERROR 23503: UPDATE on table &apos;AGENT&apos; caused a violation of 
 	at org.apache.derby.impl.sql.GenericPreparedStatement.execute(Unknown Source)
 	... 40 more
 </error>
-    <system-err>mar 29, 2017 8:36:14 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl assignMission
+    <system-err>Mar 29, 2017 11:40:36 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl assignMission
 SEVERE: Error when assigning agent the mission
-org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329203614012&apos; for key (102).  The statement has been rolled back.
+org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329234036062&apos; for key (102).  The statement has been rolled back.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(Unknown Source)
@@ -179,7 +178,7 @@ org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationExcepti
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-Caused by: ERROR 23503: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329203614012&apos; for key (102).  The statement has been rolled back.
+Caused by: ERROR 23503: UPDATE on table &apos;AGENT&apos; caused a violation of foreign key constraint &apos;SQL170329234036062&apos; for key (102).  The statement has been rolled back.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.sql.execute.ForeignKeyRIChecker.doCheck(Unknown Source)
@@ -192,10 +191,10 @@ Caused by: ERROR 23503: UPDATE on table &apos;AGENT&apos; caused a violation of 
 
 </system-err>
   </testcase>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionWithNullId" time="0.03"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignNullAgentOnMission" time="0.03"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionWithNullId" time="0.03"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMission" time="0.06">
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionWithNullId" time="0.068"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignNullAgentOnMission" time="0.077"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionWithNullId" time="0.252"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMission" time="0.074">
     <error message="Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}" type="cz.muni.fi.pv168.ServiceFailureException">cz.muni.fi.pv168.ServiceFailureException: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.findMissionWithAgent(SpyOrganizationManagerImpl.java:61)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImplTest.assignAgentOnMission(SpyOrganizationManagerImplTest.java:180)
@@ -256,7 +255,7 @@ Caused by: ERROR 42X01: Syntax error: Encountered &quot;JOIN&quot; at line 1, co
 	at org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext.prepareInternalStatement(Unknown Source)
 	... 40 more
 </error>
-    <system-err>mar 29, 2017 8:36:14 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl findMissionWithAgent
+    <system-err>Mar 29, 2017 11:40:36 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl findMissionWithAgent
 SEVERE: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 java.sql.SQLSyntaxErrorException: Syntax error: Encountered &quot;JOIN&quot; at line 1, column 51.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
@@ -317,7 +316,7 @@ Caused by: ERROR 42X01: Syntax error: Encountered &quot;JOIN&quot; at line 1, co
 
 </system-err>
   </testcase>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignMission" time="0.118">
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignMission" time="0.089">
     <error message="Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}" type="cz.muni.fi.pv168.ServiceFailureException">cz.muni.fi.pv168.ServiceFailureException: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.findMissionWithAgent(SpyOrganizationManagerImpl.java:61)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImplTest.unassignMission(SpyOrganizationManagerImplTest.java:210)
@@ -378,7 +377,7 @@ Caused by: ERROR 42X01: Syntax error: Encountered &quot;JOIN&quot; at line 1, co
 	at org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext.prepareInternalStatement(Unknown Source)
 	... 40 more
 </error>
-    <system-err>mar 29, 2017 8:36:14 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl findMissionWithAgent
+    <system-err>Mar 29, 2017 11:40:36 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl findMissionWithAgent
 SEVERE: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 java.sql.SQLSyntaxErrorException: Syntax error: Encountered &quot;JOIN&quot; at line 1, column 51.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
@@ -439,10 +438,10 @@ Caused by: ERROR 42X01: Syntax error: Encountered &quot;JOIN&quot; at line 1, co
 
 </system-err>
   </testcase>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentNotInDBFromMission" time="0"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionNotInDB" time="0.031"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnNullMission" time="0.033"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgent" time="0.128">
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentNotInDBFromMission" time="0.087"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionNotInDB" time="0.109"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnNullMission" time="0.059"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgent" time="0.087">
     <error message="Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}" type="cz.muni.fi.pv168.ServiceFailureException">cz.muni.fi.pv168.ServiceFailureException: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.findMissionWithAgent(SpyOrganizationManagerImpl.java:61)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImplTest.findMissionWithAgent(SpyOrganizationManagerImplTest.java:95)
@@ -503,7 +502,7 @@ Caused by: ERROR 42X01: Syntax error: Encountered &quot;JOIN&quot; at line 1, co
 	at org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext.prepareInternalStatement(Unknown Source)
 	... 40 more
 </error>
-    <system-err>mar 29, 2017 8:36:14 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl findMissionWithAgent
+    <system-err>Mar 29, 2017 11:40:37 PM cz.muni.fi.pv168.SpyOrganizationManagerImpl findMissionWithAgent
 SEVERE: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 java.sql.SQLSyntaxErrorException: Syntax error: Encountered &quot;JOIN&quot; at line 1, column 51.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
@@ -564,9 +563,9 @@ Caused by: ERROR 42X01: Syntax error: Encountered &quot;JOIN&quot; at line 1, co
 
 </system-err>
   </testcase>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithNullAgent" time="0"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgentHavingNullId" time="0.034"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentNotInDBOnMission" time="0.03"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMissionHavingNullId" time="0.022"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentWithNullIdOnMission" time="0.03"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithNullAgent" time="0.064"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgentHavingNullId" time="0.058"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentNotInDBOnMission" time="0.055"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMissionHavingNullId" time="0.087"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentWithNullIdOnMission" time="0.068"/>
 </testsuite>

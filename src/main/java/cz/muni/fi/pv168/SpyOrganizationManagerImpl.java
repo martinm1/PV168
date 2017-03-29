@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 public class SpyOrganizationManagerImpl implements SpyOrganizationManager {
     
     private static final Logger logger = Logger.getLogger(
-            AgentManagerImpl.class.getName());
+            MissionManagerImpl.class.getName());
     
     private DataSource dataSource;
 

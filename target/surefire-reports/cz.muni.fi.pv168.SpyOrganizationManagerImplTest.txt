@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cz.muni.fi.pv168.SpyOrganizationManagerImplTest
 -------------------------------------------------------------------------------
-Tests run: 19, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.92 sec <<< FAILURE!
-assignAgentOnMissionNotInDB(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.061 sec  <<< ERROR!
+Tests run: 19, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 2.019 sec <<< FAILURE!
+assignAgentOnMissionNotInDB(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.11 sec  <<< ERROR!
 java.lang.Exception: Unexpected exception, expected<cz.muni.fi.pv168.IllegalEntityException> but was<cz.muni.fi.pv168.ServiceFailureException>
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
@@ -43,7 +43,7 @@ Caused by: cz.muni.fi.pv168.ServiceFailureException: Error when assigning agent 
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
 	... 25 more
-Caused by: org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: UPDATE on table 'AGENT' caused a violation of foreign key constraint 'SQL170329203614012' for key (102).  The statement has been rolled back.
+Caused by: org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: UPDATE on table 'AGENT' caused a violation of foreign key constraint 'SQL170329234036062' for key (102).  The statement has been rolled back.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(Unknown Source)
@@ -56,7 +56,7 @@ Caused by: org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViola
 	at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeUpdate(Unknown Source)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.assignMission(SpyOrganizationManagerImpl.java:125)
 	... 35 more
-Caused by: ERROR 23503: UPDATE on table 'AGENT' caused a violation of foreign key constraint 'SQL170329203614012' for key (102).  The statement has been rolled back.
+Caused by: ERROR 23503: UPDATE on table 'AGENT' caused a violation of foreign key constraint 'SQL170329234036062' for key (102).  The statement has been rolled back.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.sql.execute.ForeignKeyRIChecker.doCheck(Unknown Source)
@@ -66,7 +66,7 @@ Caused by: ERROR 23503: UPDATE on table 'AGENT' caused a violation of foreign ke
 	at org.apache.derby.impl.sql.GenericPreparedStatement.executeStmt(Unknown Source)
 	at org.apache.derby.impl.sql.GenericPreparedStatement.execute(Unknown Source)
 	... 40 more
-assignAgentOnMission(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.06 sec  <<< ERROR!
+assignAgentOnMission(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.074 sec  <<< ERROR!
 cz.muni.fi.pv168.ServiceFailureException: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.findMissionWithAgent(SpyOrganizationManagerImpl.java:61)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImplTest.assignAgentOnMission(SpyOrganizationManagerImplTest.java:180)
@@ -126,7 +126,7 @@ Caused by: ERROR 42X01: Syntax error: Encountered "JOIN" at line 1, column 51.
 	at org.apache.derby.impl.sql.GenericStatement.prepare(Unknown Source)
 	at org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext.prepareInternalStatement(Unknown Source)
 	... 40 more
-unassignMission(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.118 sec  <<< ERROR!
+unassignMission(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.089 sec  <<< ERROR!
 cz.muni.fi.pv168.ServiceFailureException: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.findMissionWithAgent(SpyOrganizationManagerImpl.java:61)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImplTest.unassignMission(SpyOrganizationManagerImplTest.java:210)
@@ -186,7 +186,7 @@ Caused by: ERROR 42X01: Syntax error: Encountered "JOIN" at line 1, column 51.
 	at org.apache.derby.impl.sql.GenericStatement.prepare(Unknown Source)
 	at org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext.prepareInternalStatement(Unknown Source)
 	... 40 more
-findMissionWithAgent(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.128 sec  <<< ERROR!
+findMissionWithAgent(cz.muni.fi.pv168.SpyOrganizationManagerImplTest)  Time elapsed: 0.087 sec  <<< ERROR!
 cz.muni.fi.pv168.ServiceFailureException: Error when trying to find mission with agent Agent{id=1, name=TestA1, workingSince=1984-01-14T10:39, compromised=true}
 	at cz.muni.fi.pv168.SpyOrganizationManagerImpl.findMissionWithAgent(SpyOrganizationManagerImpl.java:61)
 	at cz.muni.fi.pv168.SpyOrganizationManagerImplTest.findMissionWithAgent(SpyOrganizationManagerImplTest.java:95)
