@@ -14,9 +14,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import java.util.Comparator;
+import javax.sql.DataSource;
+import org.apache.derby.jdbc.EmbeddedDataSource;
 
 import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.*;
+import org.junit.After;
 
 /**
  *
@@ -24,13 +27,29 @@ import static org.assertj.core.api.Assertions.*;
  */
 public class MissionManagerImplTest {
     private MissionManagerImpl manager;
+    private DataSource ds;
     
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
     
+    private static DataSource prepareDataSource() throws SQLException {
+        EmbeddedDataSource ds = new EmbeddedDataSource();
+        ds.setDatabaseName("memory:missionmgr-test");
+        ds.setCreateDatabase("create");
+        return ds;
+    }
+    
     @Before
     public void setUp() throws SQLException {
+        ds = prepareDataSource();
+        DBUtils.executeSqlScript(ds,MissionManager.class.getResource("createTables.sql"));
         manager = new MissionManagerImpl();
+        manager.setDataSource(ds);
+    }
+    
+    @After
+    public void tearDown() throws SQLException {
+        DBUtils.executeSqlScript(ds,MissionManager.class.getResource("dropTables.sql"));
     }
     
     @Test

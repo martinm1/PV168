@@ -51,8 +51,9 @@ public class MissionManagerImpl implements MissionManager {
         
         try {
             conn = dataSource.getConnection();
+            conn.setAutoCommit(false);
             st = conn.prepareStatement(
-                    "INSERT INTO Mission (danger,assignment)",
+                    "INSERT INTO Mission (danger,assignment) VALUES (?,?)",
                     Statement.RETURN_GENERATED_KEYS
             );
             st.setInt(1, mission.getDanger());
@@ -86,9 +87,11 @@ public class MissionManagerImpl implements MissionManager {
         try {
             conn = dataSource.getConnection();
             conn.setAutoCommit(false);
-            st = conn.prepareStatement("UPDATE Mission SET danger = ?, assignment = ?");
+            st = conn.prepareStatement(
+                    "UPDATE Mission SET danger = ?, assignment = ? WHERE id = ?");
             st.setInt(1, mission.getDanger());
             st.setString(2, mission.getAssignment());
+            st.setLong(3, mission.getId());
             
             int count = st.executeUpdate();
             DBUtils.checkUpdatesCount(count, mission, false);
@@ -216,9 +219,11 @@ public class MissionManagerImpl implements MissionManager {
             throw new IllegalArgumentException("Mission is null");
         }
         if (mission.getDanger()<0){
-            throw new IllegalArgumentException("Danger level is negative");
+            throw new IllegalEntityException("Danger level is negative");
         }
-        
+        if (mission.getAssignment() == null){
+            throw new IllegalEntityException("Assignment is null");
+        }
     }
     
 }

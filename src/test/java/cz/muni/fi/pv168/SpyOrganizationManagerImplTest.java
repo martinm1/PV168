@@ -5,9 +5,13 @@
  */
 package cz.muni.fi.pv168;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.sql.DataSource;
+import org.apache.derby.jdbc.EmbeddedDataSource;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,18 +28,35 @@ public class SpyOrganizationManagerImplTest {
     private MissionManagerImpl missionManager;
     private Mission m1, m2, m3, missionWithNullId, missionNotInDB;
     private Agent a1, a2, a3, a4, a5, agentWithNullId, agentNotInDB;
-    
+    private DataSource ds;
     
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
     
+    private static DataSource prepareDataSource() throws SQLException {
+        EmbeddedDataSource ds = new EmbeddedDataSource();
+        ds.setDatabaseName("memory:missionmgr-test");
+        ds.setCreateDatabase("create");
+        return ds;
+    }
+    
     @Before
-    public void setUp(){
+    public void setUp() throws SQLException {
+        ds = prepareDataSource();
+        DBUtils.executeSqlScript(ds, MissionManager.class.getResource("createTables.sql"));
         manager = new SpyOrganizationManagerImpl();
+        manager.setDataSource(ds);
         agentManager = new AgentManagerImpl();
+        agentManager.setDataSource(ds);
         missionManager = new MissionManagerImpl(); 
+        missionManager.setDataSource(ds);
         prepareTestData();
         
+    }
+    
+    @After
+    public void tearDown() throws SQLException {
+        DBUtils.executeSqlScript(ds, MissionManager.class.getResource("dropTables.sql"));
     }
     
     private void prepareTestData(){
