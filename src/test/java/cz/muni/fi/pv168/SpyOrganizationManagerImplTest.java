@@ -11,11 +11,14 @@ import java.time.format.DateTimeFormatter;
 import javax.sql.DataSource;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -269,4 +272,51 @@ public class SpyOrganizationManagerImplTest {
         return agent; 
     }
     
+    @Test
+    public void findAgentsOnMissionWithSqlExceptionThrown() throws SQLException {
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.findAgentsOnMission(m1))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+    
+    @Test
+    public void findMissionWithAgentWithSqlExceptionThrown() throws SQLException {
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.findMissionWithAgent(a1))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+    
+    @Test
+    public void assignMissionWithSqlExceptionThrown() throws SQLException {
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.assignMission(a1,m1))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+    
+    @Test
+    public void unassignMissionWithSqlExceptionThrown() throws SQLException {
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.unassignMission(a1,m1))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
 }

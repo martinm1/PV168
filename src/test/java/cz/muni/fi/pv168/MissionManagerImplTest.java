@@ -20,6 +20,8 @@ import org.apache.derby.jdbc.EmbeddedDataSource;
 import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.After;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -227,5 +229,63 @@ public class MissionManagerImplTest {
     
     private static final Comparator<Mission> MISSION_ID_COMPARATOR =
             (m1, m2) -> m1.getId().compareTo(m2.getId());
+    
+   
+
+    @Test
+    public void updateMissionWithSqlExceptionThrown() throws SQLException {
+        
+        Mission mission = newMission(8,"Test");
+        manager.createMission(mission);
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.updateMission(mission))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+    @Test
+    public void findMissionWithSqlExceptionThrown() throws SQLException {
+        
+        Mission mission = newMission(8,"Test");
+        manager.createMission(mission);
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.findMissionById(mission.getId()))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+    @Test
+    public void deleteMissionWithSqlExceptionThrown() throws SQLException {
+        
+        Mission mission = newMission(8,"Test");
+        manager.createMission(mission);
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.deleteMission(mission))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+    @Test
+    public void findAllMissionsWithSqlExceptionThrown() throws SQLException {
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.findAllMissions())
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+
+
 }
 

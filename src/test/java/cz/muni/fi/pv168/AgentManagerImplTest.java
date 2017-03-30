@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pv168;
 
+import static cz.muni.fi.pv168.MissionManagerImplTest.newMission;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +16,7 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,6 +27,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -422,4 +426,84 @@ public class AgentManagerImplTest {
     
     private static final Comparator<Agent> AGENT_ID_COMPARATOR =
             (a1, a2) -> a1.getId().compareTo(a2.getId());
+
+    @Test
+    public void updateAgentWithSqlExceptionThrown() throws SQLException {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.updateAgent(agent))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+    @Test
+    public void findAgentWithSqlExceptionThrown() throws SQLException {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.findAgentById(agent.getId()))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+    @Test
+    public void deleteAgentWithSqlExceptionThrown() throws SQLException {
+        String str = "1984-01-14 10:39";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        Agent agent = new Agent();
+        agent.setName("BondJamesBond");
+        agent.setWorkingSince(LocalDateTime.parse(str, formatter));
+        agent.setCompromised(Boolean.FALSE);
+        
+        manager.createAgent(agent);
+        
+        
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.deleteAgent(agent))
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+    @Test
+    public void findAllAgentsWithSqlExceptionThrown() throws SQLException {
+               
+        SQLException sqlException = new SQLException();
+        DataSource failingDataSource = mock(DataSource.class);
+        when(failingDataSource.getConnection()).thenThrow(sqlException);
+        manager.setDataSource(failingDataSource);
+        assertThatThrownBy(() -> manager.findAllAgents())
+                .isInstanceOf(ServiceFailureException.class)
+                .hasCause(sqlException);
+    }
+
+
 }
