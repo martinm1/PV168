@@ -1,20 +1,7 @@
 ----------------------------------------------------------------
-Thu Mar 30 15:14:45 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-1f5a-a47a-0000066bb638 
-on database directory memory:C:\Users\Boris\Desktop\pv168-repository\pv168\agentmgr-test with class loader sun.misc.Launcher$AppClassLoader@4aa298b7 
-Loaded from file:/C:/Users/Boris/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_121-b13
-user.dir=C:\Users\Boris\Desktop\pv168-repository\pv168
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Thu Mar 30 15:14:47 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance 9fc7c266-015b-1f5a-a47a-0000066bb638 
-on database directory memory:C:\Users\Boris\Desktop\pv168-repository\pv168\missionmgr-test with class loader sun.misc.Launcher$AppClassLoader@4aa298b7 
+Wed Apr 12 11:08:29 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-616b-d725-000006c2b088 
+on database directory memory:C:\Users\Boris\Desktop\pv168-repository\pv168\SpyDB with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/Boris/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_121-b13

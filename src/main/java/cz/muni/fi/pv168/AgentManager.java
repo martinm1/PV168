@@ -6,6 +6,7 @@
 package cz.muni.fi.pv168;
 
 import java.util.List;
+import javax.sql.DataSource;
 
 /**
  *
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public interface AgentManager { //comment
     
+    
+     void setDataSource(DataSource dataSource);
     /**
      * Stores new agent into the database. Id for the new agent is automatically
      * generated and stored into attribute id.

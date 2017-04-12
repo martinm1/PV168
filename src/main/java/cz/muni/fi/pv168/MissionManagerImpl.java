@@ -28,6 +28,7 @@ public class MissionManagerImpl implements MissionManager {
     private static final Logger logger = Logger.getLogger(
             MissionManagerImpl.class.getName());
     
+    
     public void setDataSource(DataSource dataSource){
         this.dataSource = dataSource;
     }
