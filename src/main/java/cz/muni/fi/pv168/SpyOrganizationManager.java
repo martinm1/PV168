@@ -6,6 +6,7 @@
 package cz.muni.fi.pv168;
 
 import java.util.List;
+import javax.sql.DataSource;
 /**
  *
  * @author martin
@@ -55,4 +56,6 @@ public interface SpyOrganizationManager {
      * @throws ServiceFailureException when database operation fails.
      */
     void unassignMission(Agent agent, Mission mission) throws ServiceFailureException, IllegalEntityException;
+    
+    void setDataSource(DataSource dataSource);
 }

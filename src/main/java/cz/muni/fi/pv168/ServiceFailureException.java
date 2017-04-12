@@ -9,7 +9,7 @@ package cz.muni.fi.pv168;
  *
  * @author martin
  */
-class ServiceFailureException extends RuntimeException {
+public class ServiceFailureException extends RuntimeException {
 
     public ServiceFailureException(String msg) {
         super(msg);

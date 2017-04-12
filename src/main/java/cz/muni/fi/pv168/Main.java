@@ -44,6 +44,12 @@ public class Main {
 
         List<Mission> allMissions = missionManager.findAllMissions();
         System.out.println("allMissions = " + allMissions);
+        
+        AgentManager agentManager = new AgentManagerImpl();
+        missionManager.setDataSource(dataSource);
+
+        List<Agent> allAgents = agentManager.findAllAgents();
+        System.out.println("allAgents = " + allAgents);
 
     }
     
