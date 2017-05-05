@@ -5,13 +5,16 @@
  */
 package cz.muni.fi.pv168;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.sql.DataSource;
 import javax.swing.table.AbstractTableModel;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -30,11 +33,14 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
      * Creates new form AgentFrame
      */
     public SpyOrganizationFrame() {
+        DataSource dataSource = Main.createMemoryDatabase();
         initComponents();
         initMissionComponents();
         log.info("All swing components initialized");
         
     }
+    
+    
     
     private void initMissionComponents(){
         Mission tm1 = new Mission();
