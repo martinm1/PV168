@@ -14,6 +14,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
 import java.util.List;
+import org.apache.derby.jdbc.ClientDriver;
 
 /**
  *
@@ -24,8 +25,8 @@ public class Main {
     
     public static DataSource createMemoryDatabase() {
         BasicDataSource bds = new BasicDataSource();
-        bds.setDriverClassName(EmbeddedDriver.class.getName());
-        bds.setUrl("jdbc:derby:memory:SpyDB;create=true");
+        bds.setDriverClassName(ClientDriver.class.getName());
+        bds.setUrl("jdbc:derby://localhost:1527/MissionDB");
         new ResourceDatabasePopulator(
                 new ClassPathResource("schema-javadb.sql"),
                 new ClassPathResource("test-data.sql"))
