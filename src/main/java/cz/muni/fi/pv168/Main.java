@@ -6,7 +6,6 @@
 package cz.muni.fi.pv168;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.derby.jdbc.EmbeddedDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -27,10 +26,15 @@ public class Main {
         BasicDataSource bds = new BasicDataSource();
         bds.setDriverClassName(ClientDriver.class.getName());
         bds.setUrl("jdbc:derby://localhost:1527/MissionDB");
+        //bds.setUsername("");
+        //bds.setPassword("");
+        
         new ResourceDatabasePopulator(
                 new ClassPathResource("schema-javadb.sql"),
                 new ClassPathResource("test-data.sql"))
                 .execute(bds);
+        
+        
         return bds;
     
     }

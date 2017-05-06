@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="23" failures="0" name="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" time="2.272" errors="0" skipped="0">
+<testsuite tests="23" failures="0" name="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" time="2.192" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -60,27 +60,27 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentWithNullIdFromMission" time="0.339"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMission" time="0.149"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromNullMission" time="0.069"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnNullMission" time="0.066"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionNotInDB" time="0.072"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionWithNullId" time="0.067"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignNullAgentOnMission" time="0.079"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignMissionWithSqlExceptionThrown" time="0.076"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignMissionWithSqlExceptionThrown" time="0.068"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionWithNullId" time="0.059"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMission" time="0.257"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignMission" time="0.168"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgentWithSqlExceptionThrown" time="0.075"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentNotInDBFromMission" time="0.054"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMissionWithSqlExceptionThrown" time="0.062"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionNotInDB" time="0.146"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnNullMission" time="0.101"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgent" time="0.104"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithNullAgent" time="0.055"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgentHavingNullId" time="0.054"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentNotInDBOnMission" time="0.04"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMissionHavingNullId" time="0.051"/>
-  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentWithNullIdOnMission" time="0.051"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentWithNullIdFromMission" time="0.354"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMission" time="0.184"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromNullMission" time="0.077"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnNullMission" time="0.067"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionNotInDB" time="0.065"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionWithNullId" time="0.073"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignNullAgentOnMission" time="0.078"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignMissionWithSqlExceptionThrown" time="0.073"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignMissionWithSqlExceptionThrown" time="0.073"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMissionWithNullId" time="0.081"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnMission" time="0.156"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignMission" time="0.135"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgentWithSqlExceptionThrown" time="0.057"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentNotInDBFromMission" time="0.057"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMissionWithSqlExceptionThrown" time="0.068"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="unassignAgentFromMissionNotInDB" time="0.144"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentOnNullMission" time="0.107"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgent" time="0.103"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithNullAgent" time="0.05"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findMissionWithAgentHavingNullId" time="0.043"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentNotInDBOnMission" time="0.041"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="findAgentsOnMissionHavingNullId" time="0.048"/>
+  <testcase classname="cz.muni.fi.pv168.SpyOrganizationManagerImplTest" name="assignAgentWithNullIdOnMission" time="0.048"/>
 </testsuite>
