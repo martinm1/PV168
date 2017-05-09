@@ -25,14 +25,15 @@ public class Main {
     public static DataSource createMemoryDatabase() {
         BasicDataSource bds = new BasicDataSource();
         bds.setDriverClassName(ClientDriver.class.getName());
+        
         bds.setUrl("jdbc:derby://localhost:1527/MissionDB");
         //bds.setUsername("");
         //bds.setPassword("");
         
-        new ResourceDatabasePopulator(
-                new ClassPathResource("schema-javadb.sql"),
-                new ClassPathResource("test-data.sql"))
-                .execute(bds);
+        //new ResourceDatabasePopulator(
+                //new ClassPathResource("schema-javadb.sql"),
+                //new ClassPathResource("test-data.sql"))
+                //.execute(bds);
         
         
         return bds;

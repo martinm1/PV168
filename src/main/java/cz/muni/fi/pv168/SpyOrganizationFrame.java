@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.sql.DataSource;
+import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.LoggerFactory;
@@ -34,29 +35,38 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
      */
     public SpyOrganizationFrame() {
         DataSource dataSource = Main.createMemoryDatabase();
+        agentManager.setDataSource( dataSource );
+        missionManager.setDataSource( dataSource );
+        spyOrganizationManager.setDataSource( dataSource );
         initComponents();
         initMissionComponents();
-        log.info("All swing components initialized");
+        initAgentComponents();
+        //log.info("All swing components initialized");
         
     }
     
     
     
     private void initMissionComponents(){
-        Mission tm1 = new Mission();
-        tm1.setAssignment("Test1");
-        tm1.setDanger(8);
-        tm1.setId(1l);
-         
-        
-        
+        List<Mission> allMissions = missionManager.findAllMissions();
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
-        model.addMission(tm1);
         
-        
-        
+        for (Mission mission : allMissions){
+            model.addMission(mission);
         }
-
+    }
+    
+    private void initAgentComponents(){
+        List<Agent> allAgents = agentManager.findAllAgents();
+        AgentTableModel model = (AgentTableModel) jTable1.getModel();
+        
+        for (Agent agent : allAgents){
+            model.addAgent(agent);
+        }
+    }
+     
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,15 +84,12 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
-        label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
-        jButton5 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jSlider2 = new javax.swing.JSlider();
         label9 = new java.awt.Label();
@@ -91,13 +98,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        label5 = new java.awt.Label();
         label6 = new java.awt.Label();
         jTextField5 = new javax.swing.JTextField();
         label7 = new java.awt.Label();
-        jSlider1 = new javax.swing.JSlider();
-        label8 = new java.awt.Label();
         jTextField3 = new javax.swing.JTextField();
         jTabbedPane2 = new javax.swing.JTabbedPane();
 
@@ -116,8 +119,11 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         });
 
         jButton3.setText("Delete agent");
-
-        jTextField1.setPreferredSize(new java.awt.Dimension(100, 22));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setPreferredSize(new java.awt.Dimension(100, 22));
 
@@ -125,15 +131,11 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", " " }));
 
-        label1.setText("ID");
-
         label2.setText("Name");
 
         label3.setText("Working since");
 
         label4.setText("Compromised");
-
-        jButton5.setText("Delete agent");
 
         jCheckBox1.setText("Yup");
 
@@ -151,7 +153,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             .addGroup(AgentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                     .addGroup(AgentPanelLayout.createSequentialGroup()
                         .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -172,17 +174,11 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(AgentPanelLayout.createSequentialGroup()
-                        .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(152, 152, 152)))
                 .addContainerGap())
         );
@@ -194,13 +190,8 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton3))
+                .addGap(54, 54, 54)
                 .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
@@ -236,24 +227,17 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         });
 
         jButton4.setText("Delete mission");
-
-        jButton6.setText("Update mission");
-
-        label5.setText("ID");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         label6.setText("Assignment");
 
         jTextField5.setPreferredSize(new java.awt.Dimension(100, 22));
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
 
         label7.setText("Danger Level");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSlider1, org.jdesktop.beansbinding.ELProperty.create("${value}"), label8, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
 
         jTextField3.setPreferredSize(new java.awt.Dimension(100, 22));
 
@@ -264,33 +248,19 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             .addGroup(MissionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                     .addGroup(MissionPanelLayout.createSequentialGroup()
                         .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(MissionPanelLayout.createSequentialGroup()
-                                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(MissionPanelLayout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(MissionPanelLayout.createSequentialGroup()
-                                        .addGap(59, 59, 59)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(MissionPanelLayout.createSequentialGroup()
-                                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(MissionPanelLayout.createSequentialGroup()
-                                        .addComponent(jButton2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton4))
-                                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton6))))
+                                .addComponent(jButton4))
+                            .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -302,33 +272,30 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton6))
-                .addGap(21, 21, 21)
-                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(MissionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Missions", MissionPanel);
+
+        jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
         jTabbedPane1.addTab("Assignments", jTabbedPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,9 +311,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
         Mission tm2 = new Mission();
         tm2.setAssignment(jTextField5.getText());
-        tm2.setDanger(jSlider1.getValue());
+        tm2.setDanger(Integer.parseInt(jTextField3.getText()));
         
-        //missionManager.createMission(tm2);
+        missionManager.createMission(tm2);
         
         model.addMission(tm2);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -364,19 +331,27 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         System.out.print(date);
         ta1.setWorkingSince(LocalDateTime.parse(date, formatter));
-        ta1.setId(1l);
+        
 
-        // agentManager.createAgent(ta1);
+        agentManager.createAgent(ta1);
         model.addAgent(ta1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
-        int column = 2;
-        int row = jTable2.getSelectedRow();
-        String value = jTable2.getModel().getValueAt(row, column).toString();
-        jTextField5.setText(value);
-    }//GEN-LAST:event_jTextField5ActionPerformed
+        Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
+        model.delMission(missionManager.findMissionById(Id));
+        missionManager.deleteMission(missionManager.findMissionById(Id));
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        AgentTableModel model = (AgentTableModel) jTable1.getModel();
+        Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+        model.delAgent(agentManager.findAgentById(Id));
+        agentManager.deleteAgent(agentManager.findAgentById(Id));
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -465,10 +440,78 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             }
         }
         
+        public  Class<?> getColumnClass(int columnIndex){
+            switch (columnIndex){
+                case 0:
+                    return Long.class;
+                case 1: 
+                    return String.class;
+                case 2:
+                    return LocalDateTime.class;
+                case 3:
+                    return Boolean.class;
+                default:
+                    throw new IllegalArgumentException("columnIndex");                    
+            }
+        
+        }
+        
+        
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex){
+            Agent agent = agents.get(rowIndex);
+            switch(columnIndex) {
+                case 0:
+                    agent.setId((Long) aValue);
+                    break;
+                case 1:
+                    agent.setName((String) aValue);
+                    break;
+                case 2:
+                    agent.setWorkingSince((LocalDateTime) aValue);
+                    break;
+                case 3:
+                    agent.setCompromised((Boolean) aValue);
+                default:
+                    throw new IllegalArgumentException("columnIndex");
+            }
+            Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+            fireTableCellUpdated(rowIndex,columnIndex);
+            AgentTableModel model = (AgentTableModel) jTable1.getModel();
+            Agent upAgent = agentManager.findAgentById(Id);
+            upAgent.setName((String) model.getValueAt(jTable1.getSelectedRow(), 1));
+            upAgent.setWorkingSince((LocalDateTime) model.getValueAt(jTable1.getSelectedRow(), 2));
+            upAgent.setCompromised((Boolean) model.getValueAt(jTable1.getSelectedRow(), 3));
+            
+            agentManager.updateAgent(agent);          
+        }
+        
+        public boolean isCellEditable(int rowIndex, int columnIndex){
+            switch (columnIndex){
+                case 0:
+                case 2:
+                case 3:
+                    return false;
+                case 1:
+                    
+                    return true;
+                default: 
+                    throw new IllegalArgumentException("columnIndex");
+            
+            }
+        
+        }
+        
+        
+        
         public void addAgent(Agent agent) {
             agents.add(agent);
             int lastRow = agents.size() - 1;
             fireTableRowsInserted(lastRow, lastRow);
+        }
+        
+        public void delAgent(Agent agent) {
+            agents.remove(agent);
+            fireTableRowsDeleted(jTable2.getSelectedRow(),jTable2.getSelectedRow());
         }
     }
     
@@ -516,10 +559,70 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             }
         }
         
+        public  Class<?> getColumnClass(int columnIndex){
+            switch (columnIndex){
+                case 0:
+                    return Long.class;
+                case 1: 
+                    return Integer.class;
+                case 2:
+                    return String.class;
+                default:
+                    throw new IllegalArgumentException("columnIndex");                    
+            }
+        
+        }
+        
+        
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex){
+            Mission mission = missions.get(rowIndex);
+            switch(columnIndex) {
+                case 0:
+                    mission.setId((Long) aValue);
+                    break;
+                case 1:
+                    mission.setDanger((Integer) aValue);
+                    break;
+                case 2:
+                    mission.setAssignment((String) aValue);
+                    break;
+                default:
+                    throw new IllegalArgumentException("columnIndex");
+            }
+            Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
+            fireTableCellUpdated(rowIndex,columnIndex);
+            MissionTableModel model = (MissionTableModel) jTable2.getModel();
+            Mission upMission = missionManager.findMissionById(Id);
+            upMission.setDanger((int) model.getValueAt(jTable2.getSelectedRow(), 1));
+            upMission.setAssignment((String) model.getValueAt(jTable2.getSelectedRow(), 2));
+            
+            
+            missionManager.updateMission(mission);          
+        }
+        
+        public boolean isCellEditable(int rowIndex, int columnIndex){
+            switch (columnIndex){
+                case 0:
+                    return false;
+                case 1:
+                case 2:
+                    return true;
+                default: 
+                    throw new IllegalArgumentException("columnIndex");
+            
+            }
+        
+        }
+        
         public void addMission(Mission mission) {
             missions.add(mission);
             int lastRow = missions.size() - 1;
             fireTableRowsInserted(lastRow, lastRow);
+        }
+        
+        public void delMission(Mission mission) {
+            missions.remove(mission);
+            fireTableRowsDeleted(jTable2.getSelectedRow(),jTable2.getSelectedRow());
         }
     }
     
@@ -530,32 +633,25 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
-    private java.awt.Label label5;
     private java.awt.Label label6;
     private java.awt.Label label7;
-    private java.awt.Label label8;
     private java.awt.Label label9;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
