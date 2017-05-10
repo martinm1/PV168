@@ -14,6 +14,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.sql.DataSource;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.LoggerFactory;
@@ -46,8 +48,8 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         initMissionComponents();
         initAgentComponents();
         log.info("All swing components initialized");
-        jTable2.setRowSelectionInterval(0, 0);
-        jTable1.setRowSelectionInterval(0, 0);
+        
+        
         
     }
     
@@ -62,6 +64,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         for (Mission mission : allMissions){
             model.addMission(mission);
             model2.addMission(mission);
+            jTable2.setRowSelectionInterval(0, 0);
         }
     }
     
@@ -72,9 +75,11 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         AssignmentTableModel model3 = (AssignmentTableModel) jTable5.getModel();
         
         for (Agent agent : allAgents){
+            
             model.addAgent(agent);
             model2.addAgent(agent);
             if (!(spyOrganizationManager.findMissionWithAgent(agent) == null)) model3.addAgent(agent);
+            jTable1.setRowSelectionInterval(0, 0);
         }
     }
      
@@ -397,6 +402,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         
         model.addMission(tm2);
         model2.addMission(tm2);
+        jTable2.setRowSelectionInterval(0, 0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -418,26 +424,55 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         agentManager.createAgent(ta1);
         model.addAgent(ta1);
         model2.addAgent(ta1);
+        jTable1.setRowSelectionInterval(0, 0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
         MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
-        Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
-        model.delMission(missionManager.findMissionById(Id));
-        model2.delMission(missionManager.findMissionById(Id));
-        missionManager.deleteMission(missionManager.findMissionById(Id));
         
-        
+        if(model.getRowCount()!=0 ){
+            Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
+
+
+            if(spyOrganizationManager.findAgentsOnMission(missionManager.findMissionById(Id)).isEmpty())
+            {
+                model.delMission(missionManager.findMissionById(Id));
+                model2.delMission(missionManager.findMissionById(Id));
+                missionManager.deleteMission(missionManager.findMissionById(Id));
+                if(model.getRowCount()!=0){
+                    jTable4.setRowSelectionInterval(0, 0);
+                    jTable2.setRowSelectionInterval(0, 0);
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(this, "error");
+        }
+        else
+            JOptionPane.showMessageDialog(this, "error");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
         AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
-        Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
-        model.delAgent(agentManager.findAgentById(Id));
-        model2.delAgent(agentManager.findAgentById(Id));
-        agentManager.deleteAgent(agentManager.findAgentById(Id));
+        
+        if(model.getRowCount()!=0 ){
+            Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+            if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(Id)) == null)
+            {
+                model.delAgent(agentManager.findAgentById(Id));
+                model2.delAgent(agentManager.findAgentById(Id));
+                agentManager.deleteAgent(agentManager.findAgentById(Id));
+                if(model.getRowCount()!=0){
+                    jTable1.setRowSelectionInterval(0, 0);
+                    jTable3.setRowSelectionInterval(0, 0);
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(this, "error");
+        }
+        else
+            JOptionPane.showMessageDialog(this, "error");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -446,9 +481,13 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         Long aId = (Long) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
         Long mId = (Long) jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0);
         
-        spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
-        assModel.addAgent(agentManager.findAgentById(aId));
-        
+        if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(aId)) == null)
+        {
+            spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+            assModel.addAgent(agentManager.findAgentById(aId));
+        }
+        else
+            JOptionPane.showMessageDialog(this, "error");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
