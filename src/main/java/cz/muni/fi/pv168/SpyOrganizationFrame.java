@@ -436,7 +436,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
         MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
         
-        if(model.getRowCount()!=0 ){
+        if(jTable2.getSelectedRow()>=0 ){
             Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
 
 
@@ -454,14 +454,14 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Agent assigned to this mission");
         }
         else
-            JOptionPane.showMessageDialog(this, "No mission in DB");
+            JOptionPane.showMessageDialog(this, "No mission selected in DB");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
         AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         
-        if(model.getRowCount()!=0 ){
+        if(jTable1.getSelectedRow()>=0 ){
             Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
             if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(Id)) == null)
             {
@@ -477,23 +477,26 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "agent is on mission");
         }
         else
-            JOptionPane.showMessageDialog(this, "no agent in DB");
+            JOptionPane.showMessageDialog(this, "no agent selected in DB");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
-        
-        Long aId = (Long) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
-        Long mId = (Long) jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0);
-        
-        if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(aId)) == null)
-        {
-            spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
-            assModel.addAgent(agentManager.findAgentById(aId));
-            
+        if(jTable3.getSelectedRow() >= 0 && jTable4.getSelectedRow() >= 0){
+            Long aId = (Long) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
+            Long mId = (Long) jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0);
+
+            if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(aId)) == null)
+            {
+                spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+                assModel.addAgent(agentManager.findAgentById(aId));
+
+            }
+            else
+                JOptionPane.showMessageDialog(this, "agent is alredy on mission");
         }
         else
-            JOptionPane.showMessageDialog(this, "agent is alredy on mission");
+            JOptionPane.showMessageDialog(this, "agent or mission not selected");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -509,7 +512,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             spyOrganizationManager.unassignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
         }
         else
-            JOptionPane.showMessageDialog(this, "No assigned missions in DB");
+            JOptionPane.showMessageDialog(this, "No assigned mission selected in DB");
     }//GEN-LAST:event_jButton6ActionPerformed
     
     /**
@@ -609,6 +612,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         }
         
         public void delAgent(Agent agent) {
+            
             agents.remove(agent);
             fireTableRowsDeleted(jTable5.getSelectedRow(),jTable5.getSelectedRow());
         }

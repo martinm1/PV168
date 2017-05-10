@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="20" failures="0" name="cz.muni.fi.pv168.AgentManagerImplTest" time="4.071" errors="0" skipped="0">
+<testsuite tests="20" failures="0" name="cz.muni.fi.pv168.AgentManagerImplTest" time="4.333" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -61,24 +61,24 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithExistingId" time="1.903"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullCompromised" time="0.084"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgent" time="0.145"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgents" time="0.122"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgentsWithSqlExceptionThrown" time="0.359"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgent" time="0.164"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithSqlExceptionThrown" time="0.093"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgent" time="0.094"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createNullAgent" time="0.058"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullWorkingSince" time="0.077"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullWorkingSince" time="0.066"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullCompromised" time="0.063"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNonExistingId" time="0.072"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAgentWithSqlExceptionThrown" time="0.049"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullName" time="0.053"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullName" time="0.055"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullWorkingSince" time="0.068"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithSqlExceptionThrown" time="0.183"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullCompromised" time="0.076"/>
-  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullName" time="0.054"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithExistingId" time="1.879"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullCompromised" time="0.094"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgent" time="0.151"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgents" time="0.115"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAllAgentsWithSqlExceptionThrown" time="0.502"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgent" time="0.224"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithSqlExceptionThrown" time="0.145"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgent" time="0.114"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createNullAgent" time="0.054"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullWorkingSince" time="0.098"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullWorkingSince" time="0.053"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullCompromised" time="0.086"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNonExistingId" time="0.1"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="findAgentWithSqlExceptionThrown" time="0.073"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="createAgentWithNullName" time="0.066"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullName" time="0.056"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullWorkingSince" time="0.136"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithSqlExceptionThrown" time="0.071"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="updateAgentWithNullCompromised" time="0.052"/>
+  <testcase classname="cz.muni.fi.pv168.AgentManagerImplTest" name="deleteAgentWithNullName" time="0.042"/>
 </testsuite>
