@@ -38,6 +38,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         agentManager.setDataSource( dataSource );
         missionManager.setDataSource( dataSource );
         spyOrganizationManager.setDataSource( dataSource );
+        
+        
+        //spyOrganizationManager.assignMission(agentManager.findAgentById(34l), missionManager.findMissionById(1l));
+        
         initComponents();
         initMissionComponents();
         initAgentComponents();
@@ -65,10 +69,12 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         List<Agent> allAgents = agentManager.findAllAgents();
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
         AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
+        AssignmentTableModel model3 = (AssignmentTableModel) jTable5.getModel();
         
         for (Agent agent : allAgents){
             model.addAgent(agent);
             model2.addAgent(agent);
+            if (!(spyOrganizationManager.findMissionWithAgent(agent) == null)) model3.addAgent(agent);
         }
     }
      
@@ -114,6 +120,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         jTextField6.setText("jTextField4");
 
@@ -303,6 +313,23 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jTable4.setModel(new MissionTableModel());
         jScrollPane4.setViewportView(jTable4);
 
+        jTable5.setModel(new AssignmentTableModel());
+        jScrollPane5.setViewportView(jTable5);
+
+        jButton5.setText("Assign");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Unassign");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AssignmentPanelLayout = new javax.swing.GroupLayout(AssignmentPanel);
         AssignmentPanel.setLayout(AssignmentPanelLayout);
         AssignmentPanelLayout.setHorizontalGroup(
@@ -310,18 +337,33 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             .addGroup(AssignmentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(453, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(AssignmentPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(AssignmentPanelLayout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addGap(187, 187, 187))
         );
         AssignmentPanelLayout.setVerticalGroup(
             AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssignmentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Assignments", AssignmentPanel);
@@ -397,6 +439,28 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         model2.delAgent(agentManager.findAgentById(Id));
         agentManager.deleteAgent(agentManager.findAgentById(Id));
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
+        
+        Long aId = (Long) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
+        Long mId = (Long) jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0);
+        
+        spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+        assModel.addAgent(agentManager.findAgentById(aId));
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
+        
+        Long aId = (Long) jTable5.getModel().getValueAt(jTable5.getSelectedRow(), 0);
+        Long mId = (Long) jTable5.getModel().getValueAt(jTable5.getSelectedRow(), 2);
+        
+        assModel.delAgent(agentManager.findAgentById(aId));
+        
+        spyOrganizationManager.unassignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+    }//GEN-LAST:event_jButton6ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -433,6 +497,84 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 new SpyOrganizationFrame().setVisible(true);
             }
         });
+    }
+    
+    private class AssignmentTableModel extends AbstractTableModel {
+
+        private List<Agent> agents = new ArrayList<Agent>();
+
+        @Override
+        public int getRowCount() {
+            return agents.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 4;
+        }
+        
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            switch (columnIndex) {
+                case 0:
+                    return "Agent Id";
+                case 1:
+                    return "Agent Name";
+                case 2:
+                    return "Mission Id";
+                case 3:
+                    return "Assignment";
+                default:
+                    throw new IllegalArgumentException("columnIndex");
+            }
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Agent agent = agents.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    return agent.getId();
+                case 1:
+                    return agent.getName();
+                case 2:
+                    return spyOrganizationManager.findMissionWithAgent(agent).getId();
+                case 3:
+                    return spyOrganizationManager.findMissionWithAgent(agent).getAssignment();
+                default:
+                    throw new IllegalArgumentException("columnIndex");
+            }
+        }
+        
+        public  Class<?> getColumnClass(int columnIndex){
+            switch (columnIndex){
+                case 0:
+                    return Long.class;
+                case 1: 
+                    return String.class;
+                case 2:
+                    return Long.class;
+                case 3:
+                    return String.class;
+                default:
+                    throw new IllegalArgumentException("columnIndex");                    
+            }
+        
+        }
+        
+        
+        public void addAgent(Agent agent) {
+            agents.add(agent);
+            int lastRow = agents.size() - 1;
+            fireTableRowsInserted(lastRow, lastRow);
+        }
+        
+        public void delAgent(Agent agent) {
+            agents.remove(agent);
+            fireTableRowsDeleted(jTable5.getSelectedRow(),jTable5.getSelectedRow());
+        }
+        
     }
     
     
@@ -679,6 +821,8 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -686,12 +830,14 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
