@@ -25,8 +25,9 @@ import org.slf4j.LoggerFactory;
  * @author martin
  */
 public class SpyOrganizationFrame extends javax.swing.JFrame {
-    Locale defaultLocale = Locale.getDefault();
-    ResourceBundle text = ResourceBundle.getBundle("Text", defaultLocale);
+    
+    Locale defaultLocale = new Locale("fr");//Locale.getDefault();
+    private static ResourceBundle bundle = ResourceBundle.getBundle("localization", new Locale("fr")/*Locale.getDefault()*/);
     private final AgentManagerImpl agentManager = new AgentManagerImpl();
     private final MissionManagerImpl missionManager = new MissionManagerImpl();
     private final SpyOrganizationManagerImpl spyOrganizationManager = new SpyOrganizationManagerImpl();
@@ -640,13 +641,13 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         public String getColumnName(int columnIndex) {
             switch (columnIndex) {
                 case 0:
-                    return "Id";
+                    return bundle.getString("Id");//"Id";
                 case 1:
-                    return "Name";
+                    return bundle.getString("Name");//"Name";
                 case 2:
-                    return "Working since";
+                    return bundle.getString("Workingsince");//"Working since";
                 case 3:
-                    return "Compromised";
+                    return bundle.getString("Compromised");//"Compromised";
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
