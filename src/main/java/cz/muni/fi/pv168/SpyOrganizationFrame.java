@@ -41,7 +41,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         initComponents();
         initMissionComponents();
         initAgentComponents();
-        //log.info("All swing components initialized");
+        log.info("All swing components initialized");
+        jTable2.setRowSelectionInterval(0, 0);
+        jTable1.setRowSelectionInterval(0, 0);
         
     }
     
@@ -50,18 +52,23 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private void initMissionComponents(){
         List<Mission> allMissions = missionManager.findAllMissions();
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
+        MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
+        
         
         for (Mission mission : allMissions){
             model.addMission(mission);
+            model2.addMission(mission);
         }
     }
     
     private void initAgentComponents(){
         List<Agent> allAgents = agentManager.findAllAgents();
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
+        AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         
         for (Agent agent : allAgents){
             model.addAgent(agent);
+            model2.addAgent(agent);
         }
     }
      
@@ -102,7 +109,11 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         label7 = new java.awt.Label();
         jTextField3 = new javax.swing.JTextField();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        AssignmentPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
 
         jTextField6.setText("jTextField4");
 
@@ -286,8 +297,34 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Missions", MissionPanel);
 
-        jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-        jTabbedPane1.addTab("Assignments", jTabbedPane2);
+        jTable3.setModel(new AgentTableModel());
+        jScrollPane3.setViewportView(jTable3);
+
+        jTable4.setModel(new MissionTableModel());
+        jScrollPane4.setViewportView(jTable4);
+
+        javax.swing.GroupLayout AssignmentPanelLayout = new javax.swing.GroupLayout(AssignmentPanel);
+        AssignmentPanel.setLayout(AssignmentPanelLayout);
+        AssignmentPanelLayout.setHorizontalGroup(
+            AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AssignmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(453, Short.MAX_VALUE))
+        );
+        AssignmentPanelLayout.setVerticalGroup(
+            AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AssignmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Assignments", AssignmentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,6 +346,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
+        MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
         Mission tm2 = new Mission();
         tm2.setAssignment(jTextField5.getText());
         tm2.setDanger(Integer.parseInt(jTextField3.getText()));
@@ -316,10 +354,12 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         missionManager.createMission(tm2);
         
         model.addMission(tm2);
+        model2.addMission(tm2);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
+        AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         Agent ta1 = new Agent();
         ta1.setName(jTextField2.getText());
         ta1.setCompromised(jCheckBox1.isSelected());
@@ -335,12 +375,15 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
         agentManager.createAgent(ta1);
         model.addAgent(ta1);
+        model2.addAgent(ta1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
+        MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
         Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
         model.delMission(missionManager.findMissionById(Id));
+        model2.delMission(missionManager.findMissionById(Id));
         missionManager.deleteMission(missionManager.findMissionById(Id));
         
         
@@ -348,8 +391,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
+        AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
         model.delAgent(agentManager.findAgentById(Id));
+        model2.delAgent(agentManager.findAgentById(Id));
         agentManager.deleteAgent(agentManager.findAgentById(Id));
     }//GEN-LAST:event_jButton3ActionPerformed
     
@@ -471,6 +516,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                     break;
                 case 3:
                     agent.setCompromised((Boolean) aValue);
+                    break;
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
@@ -480,7 +526,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             Agent upAgent = agentManager.findAgentById(Id);
             upAgent.setName((String) model.getValueAt(jTable1.getSelectedRow(), 1));
             upAgent.setWorkingSince((LocalDateTime) model.getValueAt(jTable1.getSelectedRow(), 2));
-            upAgent.setCompromised((Boolean) model.getValueAt(jTable1.getSelectedRow(), 3));
+            upAgent.setCompromised((Boolean) model.getValueAt( jTable1.getSelectedRow(), 3));
             
             agentManager.updateAgent(agent);          
         }
@@ -489,10 +535,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             switch (columnIndex){
                 case 0:
                 case 2:
-                case 3:
                     return false;
                 case 1:
-                    
+                case 3:
                     return true;
                 default: 
                     throw new IllegalArgumentException("columnIndex");
@@ -593,7 +638,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             fireTableCellUpdated(rowIndex,columnIndex);
             MissionTableModel model = (MissionTableModel) jTable2.getModel();
             Mission upMission = missionManager.findMissionById(Id);
-            upMission.setDanger((int) model.getValueAt(jTable2.getSelectedRow(), 1));
+            upMission.setDanger(((Integer) model.getValueAt(jTable2.getSelectedRow(), 1)).intValue());
             upMission.setAssignment((String) model.getValueAt(jTable2.getSelectedRow(), 2));
             
             
@@ -628,6 +673,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AgentPanel;
+    private javax.swing.JPanel AssignmentPanel;
     private javax.swing.JPanel MissionPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -638,11 +684,14 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
