@@ -64,7 +64,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         for (Mission mission : allMissions){
             model.addMission(mission);
             model2.addMission(mission);
-            jTable2.setRowSelectionInterval(0, 0);
+           // jTable2.setRowSelectionInterval(0, 0);
         }
     }
     
@@ -79,7 +79,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             model.addAgent(agent);
             model2.addAgent(agent);
             if (!(spyOrganizationManager.findMissionWithAgent(agent) == null)) model3.addAgent(agent);
-            jTable1.setRowSelectionInterval(0, 0);
+           // jTable1.setRowSelectionInterval(0, 0);
         }
     }
      
@@ -403,7 +403,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         
             model.addMission(tm2);
             model2.addMission(tm2);
-            jTable2.setRowSelectionInterval(0, 0);
+          //  jTable2.setRowSelectionInterval(0, 0);
         }
         catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Danger level must be number");
@@ -429,7 +429,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         agentManager.createAgent(ta1);
         model.addAgent(ta1);
         model2.addAgent(ta1);
-        jTable1.setRowSelectionInterval(0, 0);
+       // jTable1.setRowSelectionInterval(0, 0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -445,10 +445,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 model.delMission(missionManager.findMissionById(Id));
                 model2.delMission(missionManager.findMissionById(Id));
                 missionManager.deleteMission(missionManager.findMissionById(Id));
-                if(model.getRowCount()!=0){
-                    jTable4.setRowSelectionInterval(0, 0);
-                    jTable2.setRowSelectionInterval(0, 0);
-                }
+                //if(model.getRowCount()!=0){
+                //    jTable4.setRowSelectionInterval(0, 0);
+                //    jTable2.setRowSelectionInterval(0, 0);
+                //}
             }
             else
                 JOptionPane.showMessageDialog(this, "Agent assigned to this mission");
@@ -468,10 +468,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 model.delAgent(agentManager.findAgentById(Id));
                 model2.delAgent(agentManager.findAgentById(Id));
                 agentManager.deleteAgent(agentManager.findAgentById(Id));
-                if(model.getRowCount()!=0){
-                    jTable1.setRowSelectionInterval(0, 0);
-                    jTable3.setRowSelectionInterval(0, 0);
-                }
+               // if(model.getRowCount()!=0){
+               //     jTable1.setRowSelectionInterval(0, 0);
+               //     jTable3.setRowSelectionInterval(0, 0);
+               // }
             }
             else
                 JOptionPane.showMessageDialog(this, "agent is on mission");
@@ -700,13 +700,13 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
-            Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+            Long Id = agent.getId();//(Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
             fireTableCellUpdated(rowIndex,columnIndex);
             AgentTableModel model = (AgentTableModel) jTable1.getModel();
             Agent upAgent = agentManager.findAgentById(Id);
-            upAgent.setName((String) model.getValueAt(jTable1.getSelectedRow(), 1));
-            upAgent.setWorkingSince((LocalDateTime) model.getValueAt(jTable1.getSelectedRow(), 2));
-            upAgent.setCompromised((Boolean) model.getValueAt( jTable1.getSelectedRow(), 3));
+            upAgent.setName((String) model.getValueAt(/*jTable1.getSelectedRow()*/rowIndex, 1));
+            upAgent.setWorkingSince((LocalDateTime) model.getValueAt(/*jTable1.getSelectedRow()*/rowIndex, 2));
+            upAgent.setCompromised((Boolean) model.getValueAt( /*jTable1.getSelectedRow()*/rowIndex, 3));
             
             agentManager.updateAgent(agent);          
         }
@@ -802,7 +802,6 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         public void setValueAt(Object aValue, int rowIndex, int columnIndex){
             Mission mission = missions.get(rowIndex);
             
-            
             switch(columnIndex) {
                 case 0:
                     mission.setId((Long) aValue);
@@ -824,13 +823,13 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
-            Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
+            Long Id = mission.getId();
             fireTableCellUpdated(rowIndex,columnIndex);
             MissionTableModel model = (MissionTableModel) jTable2.getModel();
             Mission upMission = missionManager.findMissionById(Id);
 
-            upMission.setDanger(((Integer) model.getValueAt(jTable2.getSelectedRow(), 1)).intValue());
-            upMission.setAssignment((String) model.getValueAt(jTable2.getSelectedRow(), 2));
+            upMission.setDanger(((Integer) model.getValueAt(/*jTable2.getSelectedRow()*/rowIndex, 1)).intValue());
+            upMission.setAssignment((String) model.getValueAt(/*jTable2.getSelectedRow()*/rowIndex, 2));
 
 
             missionManager.updateMission(mission);

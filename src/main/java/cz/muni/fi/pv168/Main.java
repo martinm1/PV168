@@ -31,9 +31,9 @@ public class Main {
         //bds.setPassword("");
         
         //new ResourceDatabasePopulator(
-                //new ClassPathResource("schema-javadb.sql"),
-                //new ClassPathResource("test-data.sql"))
-                //.execute(bds);
+          //      new ClassPathResource("schema-javadb.sql"),
+            //    new ClassPathResource("test-data.sql"))
+              //  .execute(bds);
         
         
         return bds;
