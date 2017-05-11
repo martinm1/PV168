@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
  */
 public class SpyOrganizationFrame extends javax.swing.JFrame {
     
-    Locale defaultLocale = new Locale("fr");//Locale.getDefault();
-    private static ResourceBundle bundle = ResourceBundle.getBundle("localization", new Locale("fr")/*Locale.getDefault()*/);
+    Locale defaultLocale = new Locale("cs_CZ");//Locale.getDefault();
+    private static ResourceBundle bundle = ResourceBundle.getBundle("localization", new Locale("cs_CZ")/*Locale.getDefault()*/);
     private final AgentManagerImpl agentManager = new AgentManagerImpl();
     private final MissionManagerImpl missionManager = new MissionManagerImpl();
     private final SpyOrganizationManagerImpl spyOrganizationManager = new SpyOrganizationManagerImpl();
@@ -37,6 +37,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
      * Creates new form AgentFrame
      */
     public SpyOrganizationFrame() {
+        
         DataSource dataSource = Main.createMemoryDatabase();
         agentManager.setDataSource( dataSource );
         missionManager.setDataSource( dataSource );
@@ -49,12 +50,33 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         initMissionComponents();
         initAgentComponents();
         log.info("All swing components initialized");
-        
+        localizeSwingComponents();
         
         
     }
     
+    private void localizeSwingComponents(){
+        
+        jButton1.setText(bundle.getString("Add Agent"));
+        jButton3.setText(bundle.getString("Delete Agent"));
+        jButton2.setText(bundle.getString("Add Mission"));
+        jButton4.setText(bundle.getString("Delete Mission"));
+        jButton5.setText(bundle.getString("Assign"));
+        jButton6.setText(bundle.getString("Unassign"));
     
+        label2.setText(bundle.getString("Name"));
+        label3.setText(bundle.getString("Workingsince"));
+        label4.setText(bundle.getString("Compromised"));
+        label6.setText(bundle.getString("Assignment"));
+        label7.setText(bundle.getString("Danger level"));
+        
+        jCheckBox1.setText(bundle.getString("Yup"));
+        
+        jTabbedPane1.setTitleAt(0, bundle.getString("Agents"));
+        jTabbedPane1.setTitleAt(1, bundle.getString("Missions"));
+        jTabbedPane1.setTitleAt(2, bundle.getString("Assignments"));
+    
+    }
     
     private void initMissionComponents(){
         List<Mission> allMissions = missionManager.findAllMissions();
@@ -407,7 +429,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
           //  jTable2.setRowSelectionInterval(0, 0);
         }
         catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Danger level must be number");
+            JOptionPane.showMessageDialog(this, bundle.getString("Danger level must be a number"));
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -452,10 +474,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 //}
             }
             else
-                JOptionPane.showMessageDialog(this, "Agent assigned to this mission");
+                JOptionPane.showMessageDialog(this, bundle.getString("Agent assigned to this mission"));
         }
         else
-            JOptionPane.showMessageDialog(this, "No mission selected in DB");
+            JOptionPane.showMessageDialog(this, bundle.getString("No mission selected in DB"));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -475,10 +497,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                // }
             }
             else
-                JOptionPane.showMessageDialog(this, "agent is on mission");
+                JOptionPane.showMessageDialog(this, bundle.getString("agent is on mission"));
         }
         else
-            JOptionPane.showMessageDialog(this, "no agent selected in DB");
+            JOptionPane.showMessageDialog(this, bundle.getString("no agent selected in DB"));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -494,10 +516,10 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
             }
             else
-                JOptionPane.showMessageDialog(this, "agent is alredy on mission");
+                JOptionPane.showMessageDialog(this, bundle.getString("agent is alredy on mission"));
         }
         else
-            JOptionPane.showMessageDialog(this, "agent or mission not selected");
+            JOptionPane.showMessageDialog(this, bundle.getString("agent or mission not selected"));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -513,7 +535,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             spyOrganizationManager.unassignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
         }
         else
-            JOptionPane.showMessageDialog(this, "No assigned mission selected in DB");
+            JOptionPane.showMessageDialog(this, bundle.getString("No assigned mission selected in DB"));
     }//GEN-LAST:event_jButton6ActionPerformed
     
     /**
@@ -572,9 +594,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         public String getColumnName(int columnIndex) {
             switch (columnIndex) {
                 case 0:
-                    return "Agent Id";
+                    return bundle.getString("Agent Id");
                 case 1:
-                    return "Mission Id";
+                    return bundle.getString("Mission Id");
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
@@ -766,9 +788,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 case 0:
                     return "Id";
                 case 1:
-                    return "Danger";
+                    return bundle.getString("Danger");
                 case 2:
-                    return "Assignment";
+                    return bundle.getString("Assignment");
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
