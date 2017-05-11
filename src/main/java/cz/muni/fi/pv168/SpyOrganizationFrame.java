@@ -5,10 +5,14 @@
  */
 package cz.muni.fi.pv168;
 
+import com.toedter.calendar.JCalendar;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -19,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.LoggerFactory;
+
 
 /**
  *
@@ -32,6 +37,12 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private final MissionManagerImpl missionManager = new MissionManagerImpl();
     private final SpyOrganizationManagerImpl spyOrganizationManager = new SpyOrganizationManagerImpl();
     private final static org.slf4j.Logger log = LoggerFactory.getLogger(SpyOrganizationFrame.class);
+    
+    /*
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            agent.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
+        
+    */
     
     /**
      * Creates new form AgentFrame
@@ -63,6 +74,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jButton4.setText(bundle.getString("Delete Mission"));
         jButton5.setText(bundle.getString("Assign"));
         jButton6.setText(bundle.getString("Unassign"));
+        jButton7.setText(bundle.getString("Update date"));
     
         label2.setText(bundle.getString("Name"));
         label3.setText(bundle.getString("Workingsince"));
@@ -92,10 +104,18 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     }
     
     private void initAgentComponents(){
+        
         List<Agent> allAgents = agentManager.findAllAgents();
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
         AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         AssignmentTableModel model3 = (AssignmentTableModel) jTable5.getModel();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 1988);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        jDateChooser1.setDate(cal.getTime());
+        jDateChooser2.setDate(cal.getTime());
         
         for (Agent agent : allAgents){
             
@@ -116,7 +136,6 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jTextField6 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -126,14 +145,13 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jSlider2 = new javax.swing.JSlider();
-        label9 = new java.awt.Label();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jButton7 = new javax.swing.JButton();
         MissionPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -176,10 +194,6 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
         jTextField2.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", " " }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", " " }));
-
         label2.setText("Name");
 
         label3.setText("Working since");
@@ -188,12 +202,12 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
         jCheckBox1.setText("Yup");
 
-        jSlider2.setMaximum(1999);
-        jSlider2.setMinimum(1900);
-        jSlider2.setValue(1950);
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSlider2, org.jdesktop.beansbinding.ELProperty.create("${value}"), label9, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        jButton7.setText("Update date");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AgentPanelLayout = new javax.swing.GroupLayout(AgentPanel);
         AgentPanel.setLayout(AgentPanelLayout);
@@ -204,30 +218,29 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                     .addGroup(AgentPanelLayout.createSequentialGroup()
-                        .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(AgentPanelLayout.createSequentialGroup()
-                        .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1)
-                        .addGap(206, 206, 206))
-                    .addGroup(AgentPanelLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(AgentPanelLayout.createSequentialGroup()
-                        .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgentPanelLayout.createSequentialGroup()
+                        .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox1)
+                        .addGap(160, 160, 160))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AgentPanelLayout.createSequentialGroup()
+                        .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(AgentPanelLayout.createSequentialGroup()
+                                .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AgentPanelLayout.createSequentialGroup()
+                                .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                                .addGap(246, 246, 246)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(152, 152, 152)))
                 .addContainerGap())
         );
@@ -237,25 +250,21 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton3))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7))
                 .addGap(54, 54, 54)
-                .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(17, 17, 17)
                 .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(AgentPanelLayout.createSequentialGroup()
-                        .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)))
+                        .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AgentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,8 +418,6 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
 
-        bindingGroup.bind();
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -440,16 +447,28 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         ta1.setName(jTextField2.getText());
         ta1.setCompromised(jCheckBox1.isSelected());
         
-        String year = label9.getText();
-        String month = String.valueOf(jComboBox2.getSelectedItem());
-        String day = String.valueOf(jComboBox1.getSelectedItem());
-        String date = year+"-"+month+"-"+day+" 00:00";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(jDateChooser1.getDate());
+        //String year = String.valueOf(cal.get(Calendar.YEAR));//label9.getText();
+        //String month  = String.valueOf(cal.get(Calendar.MONTH));//String.valueOf(jComboBox2.getSelectedItem());
+        //String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));// = String.valueOf(jComboBox1.getSelectedItem());
+        //String date = year+"-"+month+"-"+day+" 00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        System.out.print(date);
-        ta1.setWorkingSince(LocalDateTime.parse(date, formatter));
         
-
+        //System.out.println(date);
+        //ta1.setWorkingSince(LocalDateTime.parse(date, formatter));
+        
+        
+        //System.out.println(
+        //        LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault())
+        //);
+        
+        ta1.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
+        
+        
         agentManager.createAgent(ta1);
+        
+       
         model.addAgent(ta1);
         model2.addAgent(ta1);
        // jTable1.setRowSelectionInterval(0, 0);
@@ -537,6 +556,29 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         else
             JOptionPane.showMessageDialog(this, bundle.getString("No assigned mission selected in DB"));
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        AgentTableModel assModel = (AgentTableModel) jTable1.getModel();
+        AgentTableModel assMode3 = (AgentTableModel) jTable3.getModel();
+        
+        if(jTable1.getSelectedRow() >=0){
+            Long aId = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            Agent agent = agentManager.findAgentById(aId);
+            agent.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser2.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
+            agentManager.updateAgent(agent);
+            assModel.delAgent(agent);
+            assModel.addAgent(agent);
+            assMode3.delAgent(agent);
+            assMode3.addAgent(agent);
+            
+        }
+        else
+            JOptionPane.showMessageDialog(this, bundle.getString("no agent selected in DB"));
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -692,6 +734,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             }
         }
         
+       
+       
+        
         public  Class<?> getColumnClass(int columnIndex){
             switch (columnIndex){
                 case 0:
@@ -727,6 +772,8 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 default:
                     throw new IllegalArgumentException("columnIndex");
             }
+            
+            
             Long Id = agent.getId();//(Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
             fireTableCellUpdated(rowIndex,columnIndex);
             AgentTableModel model = (AgentTableModel) jTable1.getModel();
@@ -742,7 +789,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             switch (columnIndex){
                 case 0:
                 case 2:
-                    return false;
+                    return false; 
                 case 1:
                 case 3:
                     return true;
@@ -887,6 +934,8 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             missions.remove(mission);
             fireTableRowsDeleted(jTable2.getSelectedRow(),jTable2.getSelectedRow());
         }
+        
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -899,15 +948,15 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
@@ -923,7 +972,5 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private java.awt.Label label4;
     private java.awt.Label label6;
     private java.awt.Label label7;
-    private java.awt.Label label9;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
