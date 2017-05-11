@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,218 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     private final MissionManagerImpl missionManager = new MissionManagerImpl();
     private final SpyOrganizationManagerImpl spyOrganizationManager = new SpyOrganizationManagerImpl();
     private final static org.slf4j.Logger log = LoggerFactory.getLogger(SpyOrganizationFrame.class);
+    private AddMissionSwingWorker addMissionSwingWorker;
+    private AddAgentSwingWorker addAgentSwingWorker;
+    private DelMissionSwingWorker delMissionSwingWorker;
+    private DelAgentSwingWorker delAgentSwingWorker;
+    private AssignSwingWorker assignSwingWorker;
+    private UnassignSwingWorker unassignSwingWorker;
+    private UpdateDateSwingWorker updateDateSwingWorker;
     
+    private class AddMissionSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            MissionTableModel model = (MissionTableModel) jTable2.getModel();
+            MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
+            Mission tm2 = new Mission();
+            tm2.setAssignment(jTextField5.getText());
+            try{
+                tm2.setDanger(Integer.parseInt(jTextField3.getText()));
+                missionManager.createMission(tm2);
+        
+                model.addMission(tm2);
+                model2.addMission(tm2);
+                //  jTable2.setRowSelectionInterval(0, 0);
+                log.info("Mission added");
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, bundle.getString("Danger level must be a number"));
+                log.info("Error: "+e);
+            }
+        
+            return null;
+        }
+    
+        protected void done(){
+            addMissionSwingWorker=null;
+        
+        }
+    
+    }
+    
+    private class AddAgentSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            AgentTableModel model = (AgentTableModel) jTable1.getModel();
+            AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
+            Agent ta1 = new Agent();
+            ta1.setName(jTextField2.getText());
+            ta1.setCompromised(jCheckBox1.isSelected());
+        
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(jDateChooser1.getDate());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        
+            ta1.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
+            agentManager.createAgent(ta1);
+            model.addAgent(ta1);
+            model2.addAgent(ta1);
+            log.info("Agent added");
+        
+            return null;
+        }
+    
+        protected void done(){
+            addAgentSwingWorker=null;
+        
+        }
+    
+    }
+    private class DelMissionSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            MissionTableModel model = (MissionTableModel) jTable2.getModel();
+            MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
+
+            if(jTable2.getSelectedRow()>=0 ){
+                Long Id = (Long) jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0);
+
+
+                if(spyOrganizationManager.findAgentsOnMission(missionManager.findMissionById(Id)).isEmpty())
+                {
+                    model.delMission(missionManager.findMissionById(Id));
+                    model2.delMission(missionManager.findMissionById(Id));
+                    missionManager.deleteMission(missionManager.findMissionById(Id));
+                    log.info("Mission deleted");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, bundle.getString("Agent assigned to this mission"));
+                    }
+            }
+            else
+                JOptionPane.showMessageDialog(null, bundle.getString("No mission selected in DB"));
+        
+            return null;
+        }
+    
+        protected void done(){
+            delMissionSwingWorker=null;
+        
+        }
+    
+    }
+    private class DelAgentSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            AgentTableModel model = (AgentTableModel) jTable1.getModel();
+            AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
+        
+            if(jTable1.getSelectedRow()>=0 ){
+                Long Id = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+                if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(Id)) == null)
+                {
+                    model.delAgent(agentManager.findAgentById(Id));
+                    model2.delAgent(agentManager.findAgentById(Id));
+                    agentManager.deleteAgent(agentManager.findAgentById(Id));
+                    log.info("Agent deleted");
+                }
+                else
+                    JOptionPane.showMessageDialog(null, bundle.getString("agent is on mission"));
+            }
+            else
+                JOptionPane.showMessageDialog(null, bundle.getString("no agent selected in DB"));
+        
+            return null;
+        }
+    
+        protected void done(){
+            delAgentSwingWorker=null;
+        
+        }
+    
+    }
+    private class AssignSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
+            if(jTable3.getSelectedRow() >= 0 && jTable4.getSelectedRow() >= 0){
+                Long aId = (Long) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
+                Long mId = (Long) jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0);
+
+                if(spyOrganizationManager.findMissionWithAgent(agentManager.findAgentById(aId)) == null)
+                {
+                    spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+                    assModel.addAgent(agentManager.findAgentById(aId));
+                    log.info("Mission assigned");
+
+                }
+                else
+                    JOptionPane.showMessageDialog(null, bundle.getString("agent is alredy on mission"));
+            }
+            else
+                JOptionPane.showMessageDialog(null, bundle.getString("agent or mission not selected"));
+            return null;
+        }
+    
+        protected void done(){
+            assignSwingWorker=null;
+        
+        }
+    
+    }
+    
+    private class UnassignSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
+
+            if(jTable5.getSelectedRow() >=0){
+                Long aId = (Long) jTable5.getModel().getValueAt(jTable5.getSelectedRow(), 0);
+                Long mId = (Long) jTable5.getModel().getValueAt(jTable5.getSelectedRow(), 1);
+
+                assModel.delAgent(agentManager.findAgentById(aId));
+
+
+                spyOrganizationManager.unassignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+                log.info("Mission unassigned");
+            }
+            else
+                JOptionPane.showMessageDialog(null, bundle.getString("No assigned mission selected in DB"));
+            return null;
+        }
+    
+        protected void done(){
+            unassignSwingWorker=null;
+        
+        }
+    
+    }
+    
+    private class UpdateDateSwingWorker extends SwingWorker<Void, Void>{
+        protected Void doInBackground() throws Exception {
+            AgentTableModel assModel = (AgentTableModel) jTable1.getModel();
+            AgentTableModel assMode3 = (AgentTableModel) jTable3.getModel();
+
+            if(jTable1.getSelectedRow() >=0){
+                Long aId = (Long) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                Agent agent = agentManager.findAgentById(aId);
+                agent.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser2.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
+                agentManager.updateAgent(agent);
+                assModel.delAgent(agent);
+                assModel.addAgent(agent);
+                assMode3.delAgent(agent);
+                assMode3.addAgent(agent);
+                log.info("Date Updated");
+
+            }
+            else
+                JOptionPane.showMessageDialog(null, bundle.getString("no agent selected in DB"));
+
+            return null;
+        }
+    
+        protected void done(){
+            updateDateSwingWorker=null;
+        
+        }
+    
+    }
     /*
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             agent.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
@@ -422,6 +634,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        /*
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
         MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
         Mission tm2 = new Mission();
@@ -439,10 +652,19 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, bundle.getString("Danger level must be a number"));
             log.info("Error: "+e);
+        }*/
+        if (addMissionSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
         }
+        addMissionSwingWorker=new AddMissionSwingWorker();
+        addMissionSwingWorker.execute();
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
         AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         Agent ta1 = new Agent();
@@ -451,33 +673,24 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         
         Calendar cal = Calendar.getInstance();
         cal.setTime(jDateChooser1.getDate());
-        //String year = String.valueOf(cal.get(Calendar.YEAR));//label9.getText();
-        //String month  = String.valueOf(cal.get(Calendar.MONTH));//String.valueOf(jComboBox2.getSelectedItem());
-        //String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));// = String.valueOf(jComboBox1.getSelectedItem());
-        //String date = year+"-"+month+"-"+day+" 00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         
-        //System.out.println(date);
-        //ta1.setWorkingSince(LocalDateTime.parse(date, formatter));
-        
-        
-        //System.out.println(
-        //        LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault())
-        //);
-        
         ta1.setWorkingSince(LocalDateTime.parse(LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault()).format(formatter), formatter));
-        
-        
         agentManager.createAgent(ta1);
-        
-       
         model.addAgent(ta1);
         model2.addAgent(ta1);
-       // jTable1.setRowSelectionInterval(0, 0);
        log.info("Agent added");
+        */
+        if (addAgentSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
+        }
+        addAgentSwingWorker=new AddAgentSwingWorker();
+        addAgentSwingWorker.execute();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        /*
         MissionTableModel model = (MissionTableModel) jTable2.getModel();
         MissionTableModel model2 = (MissionTableModel) jTable4.getModel();
         
@@ -490,10 +703,6 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 model.delMission(missionManager.findMissionById(Id));
                 model2.delMission(missionManager.findMissionById(Id));
                 missionManager.deleteMission(missionManager.findMissionById(Id));
-                //if(model.getRowCount()!=0){
-                //    jTable4.setRowSelectionInterval(0, 0);
-                //    jTable2.setRowSelectionInterval(0, 0);
-                //}
                 log.info("Mission deleted");
             }
             else{
@@ -502,9 +711,18 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("No mission selected in DB"));
+        */
+        if (delMissionSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
+        }
+        delMissionSwingWorker=new DelMissionSwingWorker();
+        delMissionSwingWorker.execute();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        /*
         AgentTableModel model = (AgentTableModel) jTable1.getModel();
         AgentTableModel model2 = (AgentTableModel) jTable3.getModel();
         
@@ -515,20 +733,25 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 model.delAgent(agentManager.findAgentById(Id));
                 model2.delAgent(agentManager.findAgentById(Id));
                 agentManager.deleteAgent(agentManager.findAgentById(Id));
-               // if(model.getRowCount()!=0){
-               //     jTable1.setRowSelectionInterval(0, 0);
-               //     jTable3.setRowSelectionInterval(0, 0);
-               // }
-               log.info("Agent deleted");
+                log.info("Agent deleted");
             }
             else
                 JOptionPane.showMessageDialog(this, bundle.getString("agent is on mission"));
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("no agent selected in DB"));
+        */
+        if (delAgentSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
+        }
+        delAgentSwingWorker=new DelAgentSwingWorker();
+        delAgentSwingWorker.execute();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        /*
         AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
         if(jTable3.getSelectedRow() >= 0 && jTable4.getSelectedRow() >= 0){
             Long aId = (Long) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
@@ -546,9 +769,18 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("agent or mission not selected"));
+        */
+        if (assignSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
+        }
+        assignSwingWorker=new AssignSwingWorker();
+        assignSwingWorker.execute();
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        /*
         AssignmentTableModel assModel = (AssignmentTableModel) jTable5.getModel();
         
         if(jTable5.getSelectedRow() >=0){
@@ -563,10 +795,18 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("No assigned mission selected in DB"));
+        */
+        
+        if (unassignSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
+        }
+        unassignSwingWorker=new UnassignSwingWorker();
+        unassignSwingWorker.execute();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        /*
         AgentTableModel assModel = (AgentTableModel) jTable1.getModel();
         AgentTableModel assMode3 = (AgentTableModel) jTable3.getModel();
         
@@ -586,6 +826,14 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("no agent selected in DB"));
+        */
+        
+        if (updateDateSwingWorker != null){
+            log.info("Operation in progress");
+            throw new IllegalStateException();
+        }
+        updateDateSwingWorker=new UpdateDateSwingWorker();
+        updateDateSwingWorker.execute();
         
     }//GEN-LAST:event_jButton7ActionPerformed
     
