@@ -434,6 +434,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             model.addMission(tm2);
             model2.addMission(tm2);
           //  jTable2.setRowSelectionInterval(0, 0);
+          log.info("Mission added");
         }
         catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, bundle.getString("Danger level must be a number"));
@@ -472,6 +473,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         model.addAgent(ta1);
         model2.addAgent(ta1);
        // jTable1.setRowSelectionInterval(0, 0);
+       log.info("Agent added");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -491,6 +493,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 //    jTable4.setRowSelectionInterval(0, 0);
                 //    jTable2.setRowSelectionInterval(0, 0);
                 //}
+                log.info("Mission deleted");
             }
             else
                 JOptionPane.showMessageDialog(this, bundle.getString("Agent assigned to this mission"));
@@ -514,6 +517,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                //     jTable1.setRowSelectionInterval(0, 0);
                //     jTable3.setRowSelectionInterval(0, 0);
                // }
+               log.info("Agent deleted");
             }
             else
                 JOptionPane.showMessageDialog(this, bundle.getString("agent is on mission"));
@@ -532,6 +536,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             {
                 spyOrganizationManager.assignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
                 assModel.addAgent(agentManager.findAgentById(aId));
+                log.info("Mission assigned");
 
             }
             else
@@ -552,6 +557,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
 
 
             spyOrganizationManager.unassignMission(agentManager.findAgentById(aId), missionManager.findMissionById(mId));
+            log.info("Mission unassigned");
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("No assigned mission selected in DB"));
@@ -573,6 +579,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
             assModel.addAgent(agent);
             assMode3.delAgent(agent);
             assMode3.addAgent(agent);
+            log.info("Date Updated");
             
         }
         else
