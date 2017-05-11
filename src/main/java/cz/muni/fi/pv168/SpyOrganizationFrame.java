@@ -438,6 +438,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
         }
         catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, bundle.getString("Danger level must be a number"));
+            log.info("Error: "+e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -495,8 +496,9 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                 //}
                 log.info("Mission deleted");
             }
-            else
+            else{
                 JOptionPane.showMessageDialog(this, bundle.getString("Agent assigned to this mission"));
+                }
         }
         else
             JOptionPane.showMessageDialog(this, bundle.getString("No mission selected in DB"));
@@ -895,6 +897,7 @@ public class SpyOrganizationFrame extends javax.swing.JFrame {
                     }
                     catch (NumberFormatException e){
                         mission.setDanger(mission.getDanger());
+                        log.info("Error: "+e);
                         break;
                     }
                     
