@@ -1,26 +1,26 @@
 ----------------------------------------------------------------
-Thu May 11 17:40:56 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-f82b-8f92-0000032f71f8 
-on database directory memory:/home/martin/data-linux/projects/pv168/agentmgr-test with class loader sun.misc.Launcher$AppClassLoader@135fbaa4 
-Loaded from file:/home/martin/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+Fri May 12 06:38:21 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015b-faf3-4e40-00000375d3c8 
+on database directory memory:C:\data-windows\pv168\agentmgr-test with class loader sun.misc.Launcher$AppClassLoader@4aa298b7 
+Loaded from file:/C:/Users/Nikdo/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_121-8u121-b13-0ubuntu1.16.04.2-b13
-user.dir=/home/martin/data-linux/projects/pv168
-os.name=Linux
+java.runtime.version=1.8.0_131-b11
+user.dir=C:\data-windows\pv168
+os.name=Windows 8.1
 os.arch=amd64
-os.version=4.4.0-75-generic
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Thu May 11 17:40:59 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance 9fc7c266-015b-f82b-8f92-0000032f71f8 
-on database directory memory:/home/martin/data-linux/projects/pv168/missionmgr-test with class loader sun.misc.Launcher$AppClassLoader@135fbaa4 
-Loaded from file:/home/martin/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+Fri May 12 06:38:26 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance 9fc7c266-015b-faf3-4e40-00000375d3c8 
+on database directory memory:C:\data-windows\pv168\missionmgr-test with class loader sun.misc.Launcher$AppClassLoader@4aa298b7 
+Loaded from file:/C:/Users/Nikdo/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_121-8u121-b13-0ubuntu1.16.04.2-b13
-user.dir=/home/martin/data-linux/projects/pv168
-os.name=Linux
+java.runtime.version=1.8.0_131-b11
+user.dir=C:\data-windows\pv168
+os.name=Windows 8.1
 os.arch=amd64
-os.version=4.4.0-75-generic
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
